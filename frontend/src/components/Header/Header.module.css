@@ -1,0 +1,49 @@
+:root {
+  --maroon: #7d0a0a;
+  --red: #bf3131;
+  --beige: #ead196;
+  --yellow: #f3edc8;
+}
+
+.header_title {
+  margin: 0;
+  padding: 0;
+  color: var(--maroon);
+  margin-bottom: 5px;
+}
+
+.header_text {
+  color: var(--red);
+  margin: 0;
+  padding: 0;
+  font-size: 1.2rem;
+}
+
+.container {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+.githubIcon {
+  width: 2rem;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+}
