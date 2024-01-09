@@ -13,6 +13,18 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+// Redirects HTTP to HTTPS
+app.use((req, res, next) => {
+  if (
+    req.header("x-forwarded-proto") !== "https" &&
+    process.env.NODE_ENV === "production"
+  ) {
+    res.redirect(`https://${req.header("host")}${req.url}`);
+  } else {
+    next();
+  }
+});
+
 // Database Connection
 /*
 mongoose
