@@ -24,8 +24,15 @@
   padding-bottom: 2.5rem;
 }
 
-.githubIcon {
+.icon {
   width: 2rem;
+  filter: brightness(0%);
+}
+
+.icons {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
 }
 
 /* Extra small devices (phones, 600px and down) */

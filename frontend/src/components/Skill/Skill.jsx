@@ -5,7 +5,7 @@ import styles from "./Skill.module.css";
 const Skill = ({ name }) => {
   return (
     <div className={styles.skill}>
-      <p className={styles.text}>{name}</p>
+      <span className={styles.text}>{name}</span>
     </div>
   );
 };

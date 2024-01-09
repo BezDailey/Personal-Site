@@ -1,6 +1,7 @@
 import React from "react";
 
 import githubMark from "../../images/github-mark.svg";
+import linkedIn from "../../images/linkedin.png";
 
 import styles from "./Header.module.css";
 
@@ -14,17 +15,20 @@ const Header = () => {
         about software development, artificial intelligence, and web
         technologies. Welcome to my personal website!
       </p>
-      <div>
+      <div className={styles.icons}>
         <a
           href="https://github.com/BezDailey"
           target="_blank"
           rel="noopener noreferrer"
         >
-          <img
-            className={styles.githubIcon}
-            src={githubMark}
-            alt="Github Icon"
-          />
+          <img className={styles.icon} src={githubMark} alt="Github Icon" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/jabez-dailey-a13b71193/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img className={styles.icon} src={linkedIn} alt="LinkedIn Icon" />
         </a>
       </div>
     </header>

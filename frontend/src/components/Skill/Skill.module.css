@@ -2,8 +2,10 @@
   margin: 0;
   padding: 0;
   background: var(--beige);
-  display: block;
+  display: flex;
   border-radius: 50px;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 .text {
@@ -14,5 +16,6 @@
   margin-left: 20px;
   margin-right: 20px;
   padding: 0;
+  text-align: center;
   color: var(--maroon);
 }

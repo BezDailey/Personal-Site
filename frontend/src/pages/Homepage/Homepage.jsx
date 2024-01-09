@@ -10,7 +10,7 @@ const Homepage = () => {
   return (
     <div>
       <Header />
-      <section>
+      <section className={styles.section}>
         <h1>Experience</h1>
         <Experience />
       </section>
