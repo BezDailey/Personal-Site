@@ -5,7 +5,15 @@ import linkedIn from "../../images/linkedin.png";
 
 import styles from "./Header.module.css";
 
-const Header = () => {
+const Header = ({ setActiveSection, activeSection }) => {
+  const getButtonClass = (value) => {
+    return activeSection === value ? styles.active : "";
+  };
+
+  const handleButtonClick = (event) => {
+    setActiveSection(event.target.value);
+  };
+
   return (
     <header className={styles.container}>
       <h1 className={styles.header_title}>Jabez Dailey</h1>
@@ -15,6 +23,49 @@ const Header = () => {
         about software development, artificial intelligence, and web
         technologies. Welcome to my personal website!
       </p>
+      <div className={styles.links}>
+        <button
+          onClick={handleButtonClick}
+          value={"experience"}
+          className={getButtonClass("experience")}
+        >
+          Experience
+        </button>
+        <button
+          onClick={handleButtonClick}
+          className={getButtonClass("projects")}
+          value="projects"
+          type="button"
+        >
+          Projects
+        </button>
+        {/*
+        <button
+          onClick={handleButtonClick}
+          className={getButtonClass("certifications")}
+          value="certifications"
+          type="button"
+        >
+          Certifications
+        </button>
+        <button
+          onClick={handleButtonClick}
+          className={getButtonClass("technical_skills")}
+          value="technical_skills"
+          type="button"
+        >
+          Technical Skills
+        </button>
+        <button
+          onClick={handleButtonClick}
+          className={getButtonClass("blog")}
+          value="blog"
+          type="button"
+        >
+          Blog
+        </button>
+        */}
+      </div>
       <div className={styles.icons}>
         <a
           href="https://github.com/BezDailey"

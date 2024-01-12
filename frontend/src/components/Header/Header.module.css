@@ -23,8 +23,8 @@
   width: 95%;
   padding-left: 2.5%;
   padding-right: 2.5%;
-  padding-top: 2.5rem;
-  padding-bottom: 2.5rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   background: var(--beige);
 }
 
@@ -37,6 +37,29 @@
   display: flex;
   width: 100%;
   gap: 1rem;
+}
+
+.links {
+  display: flex;
+  width: 100%;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.active {
+  color: var(--maroon);
+  font-weight: bold;
+}
+
+button {
+  all: unset;
+  font-size: 1.3rem;
+  color: var(--red);
+}
+
+button:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* Extra small devices (phones, 600px and down) */
