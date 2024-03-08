@@ -109,6 +109,7 @@
     "safer-buffer": "^2.1.2",
     "semver": "^7.5.4",
     "send": "^0.18.0",
+    "serve": "^14.2.1",
     "serve-static": "^1.15.0",
     "set-function-length": "^1.1.1",
     "setprototypeof": "^1.2.0",
