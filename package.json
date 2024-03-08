@@ -153,7 +153,7 @@
     "dev": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "heroku-postbuild": "cd frontend && npm install && npm run build",
     "prestart": "cd frontend && npm run build",
-    "start": "node backend/server.js"
+    "start": "cd frontend && npm run heroku"
   },
   "keywords": [],
   "author": "",
