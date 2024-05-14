@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import {useState} from "react";
 
 import styles from "./Homepage.module.css";
 
@@ -7,6 +7,7 @@ import styles from "./Homepage.module.css";
 import Header from "../../components/Header/Header";
 import Experience from "../../components/Experience/Experience";
 import Projects from "../../components/Projects/Projects";
+import Blog from "../../components/Blog/Blog";
 
 const Homepage = () => {
   const [activeSection, setActiveSection] = useState("experience");
@@ -41,12 +42,13 @@ const Homepage = () => {
             <h1>Technical Skills</h1>
           </>
         )}
+        */}
         {activeSection === "blog" && (
           <>
             <h1>Blog</h1>
+            <Blog />
           </>
         )}
-        */}
       </section>
     </div>
   );

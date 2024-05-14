@@ -56,6 +56,7 @@ const Header = ({ setActiveSection, activeSection }) => {
         >
           Technical Skills
         </button>
+        */}
         <button
           onClick={handleButtonClick}
           className={getButtonClass("blog")}
@@ -64,7 +65,6 @@ const Header = ({ setActiveSection, activeSection }) => {
         >
           Blog
         </button>
-        */}
       </div>
       <div className={styles.icons}>
         <a

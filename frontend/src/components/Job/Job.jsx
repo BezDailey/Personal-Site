@@ -3,8 +3,7 @@ import React from "react";
 import styles from "./Job.module.css";
 
 import Skill from "../Skill/Skill";
-
-const Job = ({ date, title, employer, location, description, skills }) => {
+const Job = ({date, title, employer, location, description, skills}) => {
   return (
     <div>
       <h3 className={styles.date}>{date}</h3>
