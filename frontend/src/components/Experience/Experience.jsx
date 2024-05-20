@@ -7,6 +7,31 @@ import Job from "../Job/Job";
 const Experience = () => {
   const experiences = [
     {
+      date: "Feb 2024 - May 2024",
+      title: "Software Engineer Intern",
+      employer: "McKinsey & Company",
+      location: "Atlanta, GA",
+      description: "During my internship at McKinsey & Company, I spearheaded the development of an SQL optimization app using OpenAI’s language models, which improved query efficiency by 40%. I also built a responsive React frontend to enhance user experience and developed a robust Flask backend with RESTful APIs. This full-stack development project showcased my ability to integrate advanced machine learning techniques with practical web development skills.",
+      skills: [
+        "OpenAI's LLMs",
+        "Query Efficiency Improvement",
+        "Flask",
+        "RESTful API Development",
+        "React",
+        "Responsive Design",
+        "Client-Server Architecture",
+        "Python",
+        "JavaScript",
+        "SQL Databases",
+        "API Integration",
+        "User Interface Design",
+        "User-Centric Design",
+        "Git",
+        "Full-Stack Development",
+        "Agile Methodologies",
+      ],
+    },
+    {
       date: "May 2023 - August 2023",
       title: "Software Engineer Intern",
       employer: "Salesforce",
