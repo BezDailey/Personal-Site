@@ -17,7 +17,7 @@ const Header = ({ setActiveSection, activeSection }) => {
   return (
     <header className={styles.container}>
       <h1 className={styles.header_title}>Jabez Dailey</h1>
-      <h2 className={styles.header_text}>Incoming Analyst @ Deloitte GPS</h2>
+      <h2 className={styles.header_text}>Solutions Engineering Analyst @ Deloitte GPS</h2>
       <p>
       I am a recent Computer Science graduate from Morehouse College, passionate about software development, artificial intelligence, and web technologies. Welcome to my personal website!
       </p>

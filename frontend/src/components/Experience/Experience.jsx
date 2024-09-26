@@ -7,6 +7,18 @@ import Job from "../Job/Job";
 const Experience = () => {
   const experiences = [
     {
+      date: "Jun 2024 - Present",
+      title: "Solutions Engineering Analyst",
+      employer: "Deloitte",
+      location: "Atlanta, GA",
+      description: "As a Solutions Engineering Analyst, I contributed to a firm initiative focused on leveraging a computer vision model to autonomously guide unmanned ground vehicles toward the nearest person. Additionally, I audited a organization's investment review process to identify opportunities for to integrate AI, ultimately optimizing the officiency and accuracy of investment evaluations.",
+      skills: [
+        "AI Integration",
+        "Computer Vision",
+        "Process Auditing",
+      ]
+    },
+    {
       date: "Feb 2024 - May 2024",
       title: "Software Engineer Intern",
       employer: "McKinsey & Company",
