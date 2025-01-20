@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import styles from "./MiniEssay.module.css";
+import styles from "./Node1.module.css";
 import Skill from "../../Skill/Skill"
 
 const MiniEssay = () => {
