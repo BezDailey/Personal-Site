@@ -8,6 +8,8 @@ import Header from "../../components/Header/Header";
 import Experience from "../../components/Experience/Experience";
 import Projects from "../../components/Projects/Projects";
 import Blog from "../../components/Blog/Blog";
+import Footer from "../../components/Footer/Footer";
+import AdminPortal from "../AdminPortal/AdminPortal";
 
 const Homepage = () => {
   const [activeSection, setActiveSection] = useState("experience");
@@ -49,7 +51,9 @@ const Homepage = () => {
             <Blog />
           </>
         )}
+        {activeSection === "admin" && <AdminPortal />}
       </section>
+      <Footer setActiveSection={setActiveSection} />
     </div>
   );
 };

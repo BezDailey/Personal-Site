@@ -32,3 +32,51 @@ Each blog post is a standalone component in `src/components/BlogPosts/<PostName>
 Experience entries live as a hardcoded array in `Experience.jsx`; projects live in `Projects.jsx`. To add/update content, edit those arrays directly.
 
 **Styling:** CSS Modules (`.module.css`) colocated with each component. No global CSS framework.
+
+## Design System
+
+### Color Palette
+
+CSS variables are defined in `App.css` and re-declared in `Header.module.css`:
+
+| Variable             | Hex / Value              | Usage                                      |
+|----------------------|--------------------------|--------------------------------------------|
+| `--maroon`           | `#7d0a0a`                | Primary headings, active nav, bold accents |
+| `--red`              | `#bf3131`                | Secondary headings, nav buttons, dates     |
+| `--beige`            | `#ead196`                | Header background, skill pill background   |
+| `--yellow`           | `#f3edc8`                | Blog card background, blog overlay         |
+| `--yellow-background`| `hsl(52, 64%, 92.5%)`    | Page background (`html`)                   |
+
+### Typography
+
+- **Font stack:** `-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', ...` (system sans-serif), set globally in `index.css`
+- **Code font:** `source-code-pro, Menlo, Monaco, Consolas, 'Courier New'`, applied to `<code>` globally
+- **Heading colors:** `h1` → `--maroon`, `h2` → `--red`
+- **Small/meta text:** `0.85–0.9rem`, bold, `--maroon`
+- **Body text:** default size, default color
+
+### Buttons
+
+All buttons use `all: unset` (set globally in `Header.module.css`) — no border, no background, inherits font. Shared behavior:
+- Default color: `--red`
+- Hover: `text-decoration: underline`, `cursor: pointer`
+- Active/selected nav button: `--maroon` + `font-weight: bold`
+
+### Skill Pills
+
+Rendered by `Skill.jsx`. Pill shape via `border-radius: 50px`, background `--beige`, text `0.8em` bold `--maroon`, horizontal padding `20px`.
+
+### Layout
+
+- **Page max-width:** At `≥1200px`, body is `65%` width centered with `15%` side margins. Below that, `95%` width with `2.5%` margins.
+- **Section padding:** Main content sections use `width: 95%; padding-left: 2.5%; padding-right: 2.5%`
+- **Header:** Full-width `--beige` background, `padding-top: 2rem`
+- **Lists (Experience, Projects, Blog):** `flex-direction: column; gap: 10px`
+- **Skill tag rows:** `flex-direction: row; flex-wrap: wrap; gap: 10px`
+
+### Code Blocks (in blog posts)
+
+Styled in `BlogPost.module.css`:
+- `<code>` inline: background `#f5f5f5`, color `#c7254e`, `border-radius: 4px`, padding `0.2em 0.4em`
+- `<pre>` block: background `#f5f5f5`, `border-radius: 6px`, `box-shadow: 0 0 0.25rem rgba(0,0,0,0.05)`, `padding: 1rem`
+- `<pre code>`: background reset to none, color `#333`

@@ -38,6 +38,7 @@
     "depd": "^2.0.0",
     "destroy": "^1.2.0",
     "dotenv": "^16.3.1",
+    "jsonwebtoken": "^9.0.2",
     "ee-first": "^1.1.1",
     "emoji-regex": "^8.0.0",
     "encodeurl": "^1.0.2",
@@ -147,13 +148,9 @@
     "concurrently": "^8.2.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start-frontend": "cd frontend && npm start",
-    "start-backend": "cd backend && npm start",
-    "dev": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
-    "heroku-postbuild": "cd frontend && npm install && npm run build",
-    "prestart": "cd frontend && npm run build",
-    "start": "cd frontend && npm run heroku"
+    "start": "node server.js",
+    "dev": "cd frontend && npm start",
+    "heroku-postbuild": "cd frontend && npm install && npm run build"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 3rem 0;
+}
+
+.card {
+  background: var(--yellow);
+  border-left: 4px solid var(--maroon);
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--maroon);
+  margin: 0;
+  line-height: 1.1;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fieldLabel {
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+
+.input {
+  background: var(--yellow-background);
+  border: 1.5px solid var(--beige);
+  border-radius: 0;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  color: #3a2a2a;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.input:focus {
+  border-color: var(--maroon);
+}
+
+.error {
+  font-size: 0.85rem;
+  color: var(--red);
+  margin: 0;
+  font-weight: bold;
+}
+
+.submitBtn {
+  all: unset;
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--maroon);
+  border-bottom: 2px solid var(--maroon);
+  padding-bottom: 2px;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.submitBtn:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
