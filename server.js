@@ -46,6 +46,10 @@ async function initDB() {
       note TEXT DEFAULT '',
       created_at TIMESTAMP DEFAULT NOW()
     );
+
+    ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_enabled BOOLEAN DEFAULT FALSE;
+    ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_amount NUMERIC(10,2);
+    ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_day INTEGER;
   `);
 }
 
@@ -60,6 +64,11 @@ function rowToDebt(row, payments = []) {
     minimumPayment: parseFloat(row.minimum_payment),
     notes: row.notes || "",
     payments,
+    autopay: {
+      enabled: row.autopay_enabled || false,
+      amount: row.autopay_amount ? parseFloat(row.autopay_amount) : null,
+      dayOfMonth: row.autopay_day || null,
+    },
   };
 }
 
@@ -209,6 +218,34 @@ app.delete("/api/debts/:id/payments/:paymentId", async (req, res) => {
       [amount, req.params.id]
     );
     res.json({ success: true, newBalance: parseFloat(debtRes.rows[0].balance) });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.put("/api/debts/:id/autopay", async (req, res) => {
+  const { enabled, amount, dayOfMonth } = req.body;
+  try {
+    const result = await pool.query(
+      `UPDATE debts SET
+        autopay_enabled = $1,
+        autopay_amount = $2,
+        autopay_day = $3
+       WHERE id = $4 RETURNING *`,
+      [
+        Boolean(enabled),
+        amount ? Number(amount) : null,
+        dayOfMonth ? Math.min(28, Math.max(1, Number(dayOfMonth))) : null,
+        req.params.id,
+      ]
+    );
+    if (!result.rows.length) return res.status(404).json({ error: "Debt not found" });
+    const row = result.rows[0];
+    res.json({
+      enabled: row.autopay_enabled,
+      amount: row.autopay_amount ? parseFloat(row.autopay_amount) : null,
+      dayOfMonth: row.autopay_day,
+    });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

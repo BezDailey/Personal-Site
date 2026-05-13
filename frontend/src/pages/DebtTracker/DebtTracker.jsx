@@ -7,6 +7,7 @@ import DebtCard from "../../components/DebtCard/DebtCard";
 import DebtForm from "../../components/DebtForm/DebtForm";
 import PaymentModal from "../../components/PaymentModal/PaymentModal";
 import WhatIfCalculator from "../../components/WhatIfCalculator/WhatIfCalculator";
+import AutopayModal from "../../components/AutopayModal/AutopayModal";
 
 const DebtTracker = () => {
   const [debts, setDebts] = useState([]);
@@ -15,6 +16,7 @@ const DebtTracker = () => {
   const [showForm, setShowForm] = useState(false);
   const [editingDebt, setEditingDebt] = useState(null);
   const [payingDebt, setPayingDebt] = useState(null);
+  const [autopayDebt, setAutopayDebt] = useState(null);
 
   useEffect(() => {
     fetch("/api/debts")
@@ -81,6 +83,20 @@ const DebtTracker = () => {
     setDebts((prev) => prev.filter((d) => d.id !== id));
   };
 
+  const handleSaveAutopay = async ({ enabled, amount, dayOfMonth }) => {
+    const updated = await fetch(`/api/debts/${autopayDebt.id}/autopay`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ enabled, amount, dayOfMonth }),
+    }).then((r) => r.json());
+    setDebts((prev) =>
+      prev.map((d) =>
+        d.id === autopayDebt.id ? { ...d, autopay: updated } : d
+      )
+    );
+    setAutopayDebt(null);
+  };
+
   const handleLogPayment = async ({ amount, date, note }) => {
     const result = await fetch(`/api/debts/${payingDebt.id}/payments`, {
       method: "POST",
@@ -121,6 +137,7 @@ const DebtTracker = () => {
             projection={projectionMap[debt.id]}
             priority={debt.id === priorityId ? 1 : 0}
             onPay={() => setPayingDebt(debt)}
+            onAutopay={() => setAutopayDebt(debt)}
             onEdit={() => { setEditingDebt(debt); setShowForm(false); }}
             onDelete={handleDeleteDebt}
           />
@@ -160,6 +177,14 @@ const DebtTracker = () => {
           debt={payingDebt}
           onSubmit={handleLogPayment}
           onClose={() => setPayingDebt(null)}
+        />
+      )}
+
+      {autopayDebt && (
+        <AutopayModal
+          debt={autopayDebt}
+          onSubmit={handleSaveAutopay}
+          onClose={() => setAutopayDebt(null)}
         />
       )}
     </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./DebtCard.module.css";
 import { fmt$, fmtMonth } from "../../utils/projections";
 
-const DebtCard = ({ debt, projection, priority, onPay, onEdit, onDelete }) => {
+const DebtCard = ({ debt, projection, priority, onPay, onEdit, onDelete, onAutopay }) => {
   const [showPayments, setShowPayments] = useState(false);
   const progress = debt.originalBalance > 0
     ? Math.min(100, Math.round(((debt.originalBalance - debt.balance) / debt.originalBalance) * 100))
@@ -12,7 +12,14 @@ const DebtCard = ({ debt, projection, priority, onPay, onEdit, onDelete }) => {
     <div className={styles.card}>
       <div className={styles.top}>
         <div className={styles.info}>
-          {priority === 1 && <span className={styles.priorityBadge}>Priority Target</span>}
+          <div className={styles.badges}>
+            {priority === 1 && <span className={styles.priorityBadge}>Priority Target</span>}
+            {debt.autopay?.enabled && (
+              <span className={styles.autopayBadge}>
+                Autopay {fmt$(debt.autopay.amount)}/mo · Day {debt.autopay.dayOfMonth}
+              </span>
+            )}
+          </div>
           <h3 className={styles.name}>{debt.name}</h3>
           <p className={styles.meta}>
             {debt.interestRate}% APR · Min {fmt$(debt.minimumPayment)}/mo
@@ -39,6 +46,9 @@ const DebtCard = ({ debt, projection, priority, onPay, onEdit, onDelete }) => {
 
       <div className={styles.actions}>
         <button className={styles.actionBtn} onClick={onPay} type="button">Log Payment →</button>
+        <button className={styles.actionBtn} onClick={onAutopay} type="button">
+          {debt.autopay?.enabled ? "Autopay ✓" : "Autopay"}
+        </button>
         <button className={styles.actionBtn} onClick={onEdit} type="button">Edit</button>
         <button
           className={`${styles.actionBtn} ${styles.danger}`}
