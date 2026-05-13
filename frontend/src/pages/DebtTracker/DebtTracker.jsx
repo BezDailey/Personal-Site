@@ -123,11 +123,11 @@ const DebtTracker = () => {
         <p className={styles.subtitle}>Track debts, choose a strategy, and visualize your path to freedom</p>
       </div>
 
-      <StrategySettings settings={settings} onSave={handleSaveSettings} />
-
       {debts.length > 0 && (
         <SummaryBar debts={debts} projections={projections} />
       )}
+
+      <StrategySettings settings={settings} onSave={handleSaveSettings} />
 
       <div className={styles.debts}>
         {debts.map((debt) => (
