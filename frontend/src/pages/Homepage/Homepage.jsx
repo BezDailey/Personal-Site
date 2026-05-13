@@ -21,36 +21,9 @@ const Homepage = () => {
         setActiveSection={setActiveSection}
       />
       <section className={styles.section}>
-        {activeSection === "experience" && (
-          <>
-            <h1>Experience</h1>
-            <Experience />
-          </>
-        )}
-        {activeSection === "projects" && (
-          <>
-            <h1>Projects</h1>
-            <Projects />
-          </>
-        )}
-        {/*
-        {activeSection === "certifications" && (
-          <>
-            <h1>Certifications</h1>
-          </>
-        )}
-        {activeSection === "technical_skills" && (
-          <>
-            <h1>Technical Skills</h1>
-          </>
-        )}
-        */}
-        {activeSection === "blog" && (
-          <>
-            <h1>Blog</h1>
-            <Blog />
-          </>
-        )}
+        {activeSection === "experience" && <Experience />}
+        {activeSection === "projects" && <Projects />}
+        {activeSection === "blog" && <Blog />}
         {activeSection === "admin" && <AdminPortal />}
       </section>
       <Footer setActiveSection={setActiveSection} />
