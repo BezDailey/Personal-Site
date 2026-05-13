@@ -1,70 +1,118 @@
-# Getting Started with Create React App
+# jabezdailey.com
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Personal website and admin portal for Jabez Dailey — Software Engineer at Deloitte, Morehouse College CS graduate, incoming Georgia Tech OMSCS student.
 
-## Available Scripts
+Live at **[jabezdailey.com](https://jabezdailey.com)**
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+| Layer | Tech |
+|-------|------|
+| Frontend | React (Create React App), CSS Modules |
+| Backend | Node.js, Express |
+| Database | PostgreSQL (Heroku Postgres) |
+| Auth | JWT (jsonwebtoken) |
+| Hosting | Heroku |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Local Development
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**Prerequisites:** Node.js, a running PostgreSQL instance (or Heroku Postgres connection string)
 
-### `npm run build`
+1. Clone the repo and install root dependencies:
+   ```bash
+   npm install
+   ```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. Install frontend dependencies:
+   ```bash
+   cd frontend && npm install && cd ..
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. Create a `.env` file in the root:
+   ```
+   ADMIN_USERNAME=your_username
+   ADMIN_PASSWORD=your_password
+   JWT_SECRET=your_secret
+   DATABASE_URL=postgres://...
+   PORT=3001
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. Start both the Express server and React dev server concurrently:
+   ```bash
+   npm run dev
+   ```
+   - React app: http://localhost:3000 (proxies `/api` to port 3001)
+   - Express API: http://localhost:3001
 
-### `npm run eject`
+Or run them separately:
+```bash
+node server.js          # API server
+cd frontend && npm start  # React dev server
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Project Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+/
+├── server.js               # Express server — API routes, auth, static serving
+├── frontend/               # React app (Create React App)
+│   └── src/
+│       ├── pages/          # Full-page views (Homepage, DebtTracker, AdminPortal)
+│       ├── components/     # Reusable UI components
+│       └── utils/
+│           └── projections.js  # Debt payoff algorithm (avalanche/snowball)
+└── scripts/
+    └── migrate.js          # One-time data migration to Postgres
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## Features
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Personal Site
+- Experience, Projects, and Blog sections with no client-side routing (state-driven via `useState`)
+- Blog posts use a shared `BlogPost` wrapper component
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Admin Portal
+- Accessible via a discreet link in the footer
+- Password-protected with JWT authentication (24h token stored in `sessionStorage`)
+- Launchpad for hosted side projects
 
-### Code Splitting
+### Debt Payoff Tracker
+- Add, edit, and delete debts
+- Log payments and track balance progress
+- **Avalanche** (highest APR first) and **Snowball** (lowest balance first) payoff strategies
+- Extra monthly payment allocation to the priority target
+- **Autopay** — configure a monthly amount and day; payments are auto-logged on page load when due
+- **What If calculator** — slider for extra monthly payment + one-time lump sum (e.g. tax refund) with projected payoff date, months saved, and interest saved
+- Summary bar with months-to-freedom countdown, target date, and total eliminated
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+---
 
-### Analyzing the Bundle Size
+## Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The app is deployed on Heroku. Pushing to `main` triggers an automatic build:
 
-### Making a Progressive Web App
+1. `heroku-postbuild` runs `cd frontend && npm install && npm run build`
+2. `server.js` serves the static React build and handles all `/api` routes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+**Required Heroku config vars:**
+```
+ADMIN_USERNAME
+ADMIN_PASSWORD
+JWT_SECRET
+DATABASE_URL   (auto-set by Heroku Postgres add-on)
+```
 
-### Advanced Configuration
+To provision the database (first time only):
+```bash
+heroku addons:create heroku-postgresql:essential-0 --app <app-name>
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The database schema is created automatically on server start via `initDB()` in `server.js`.
