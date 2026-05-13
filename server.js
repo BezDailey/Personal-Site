@@ -50,6 +50,7 @@ async function initDB() {
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_enabled BOOLEAN DEFAULT FALSE;
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_amount NUMERIC(10,2);
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_day INTEGER;
+    ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_last_paid DATE;
   `);
 }
 
@@ -68,6 +69,7 @@ function rowToDebt(row, payments = []) {
       enabled: row.autopay_enabled || false,
       amount: row.autopay_amount ? parseFloat(row.autopay_amount) : null,
       dayOfMonth: row.autopay_day || null,
+      lastPaid: row.autopay_last_paid ? row.autopay_last_paid.toISOString().split("T")[0] : null,
     },
   };
 }
@@ -108,9 +110,42 @@ async function getSettings() {
   return rowToSettings(res.rows[0]);
 }
 
+// ── Autopay Processing ────────────────────────────────────────────────────────
+async function processAutopay() {
+  const today = new Date();
+  const todayDay = today.getDate();
+  const thisMonth = today.toISOString().slice(0, 7); // "YYYY-MM"
+
+  const res = await pool.query(
+    `SELECT * FROM debts
+     WHERE autopay_enabled = TRUE
+       AND autopay_amount IS NOT NULL
+       AND autopay_day IS NOT NULL
+       AND balance > 0
+       AND autopay_day <= $1
+       AND (autopay_last_paid IS NULL OR TO_CHAR(autopay_last_paid, 'YYYY-MM') <> $2)`,
+    [todayDay, thisMonth]
+  );
+
+  for (const debt of res.rows) {
+    const amount = Math.min(parseFloat(debt.autopay_amount), parseFloat(debt.balance));
+    const paymentId = randomUUID();
+    const dateStr = today.toISOString().split("T")[0];
+    await pool.query(
+      "INSERT INTO payments (id, debt_id, amount, date, note) VALUES ($1,$2,$3,$4,$5)",
+      [paymentId, debt.id, amount, dateStr, "Autopay"]
+    );
+    await pool.query(
+      "UPDATE debts SET balance = GREATEST(0, balance - $1), autopay_last_paid = $2 WHERE id = $3",
+      [amount, dateStr, debt.id]
+    );
+  }
+}
+
 // ── Debt Routes ───────────────────────────────────────────────────────────────
 app.get("/api/debts", async (req, res) => {
   try {
+    await processAutopay();
     const [debts, settings] = await Promise.all([getAllDebts(), getSettings()]);
     res.json({ debts, settings });
   } catch (err) {
