@@ -10,6 +10,7 @@ import Projects from "../../components/Projects/Projects";
 import Blog from "../../components/Blog/Blog";
 import Footer from "../../components/Footer/Footer";
 import AdminPortal from "../AdminPortal/AdminPortal";
+import DebtTracker from "../DebtTracker/DebtTracker";
 
 const Homepage = () => {
   const [activeSection, setActiveSection] = useState("experience");
@@ -24,7 +25,8 @@ const Homepage = () => {
         {activeSection === "experience" && <Experience />}
         {activeSection === "projects" && <Projects />}
         {activeSection === "blog" && <Blog />}
-        {activeSection === "admin" && <AdminPortal />}
+        {activeSection === "admin" && <AdminPortal setActiveSection={setActiveSection} />}
+        {activeSection === "debt-tracker" && <DebtTracker />}
       </section>
       <Footer setActiveSection={setActiveSection} />
     </div>

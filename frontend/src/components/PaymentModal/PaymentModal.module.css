@@ -1,0 +1,154 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(60, 30, 10, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal {
+  background: var(--yellow);
+  border-left: 4px solid var(--maroon);
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--maroon);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+.sub {
+  font-size: 0.85rem;
+  color: var(--red);
+  margin: 0.2rem 0 0 0;
+}
+
+.closeBtn {
+  all: unset;
+  font-size: 1rem;
+  color: #aaa;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.closeBtn:hover {
+  color: var(--maroon);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+
+.optional {
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #888;
+  font-size: 0.75rem;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--beige);
+  background: var(--yellow-background);
+}
+
+.inputRow:focus-within {
+  border-color: var(--maroon);
+}
+
+.affix {
+  padding: 0.5rem 0.6rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--maroon);
+  background: var(--beige);
+}
+
+.input {
+  all: unset;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  color: #3a2a2a;
+  width: 100%;
+}
+
+.inputPlain {
+  all: unset;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  color: #3a2a2a;
+  background: var(--yellow-background);
+  border: 1.5px solid var(--beige);
+  width: 100%;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.inputPlain:focus {
+  border-color: var(--maroon);
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.submitBtn {
+  all: unset;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--maroon);
+  border-bottom: 2px solid var(--maroon);
+  padding-bottom: 1px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.submitBtn:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.cancelBtn {
+  all: unset;
+  font-size: 0.9rem;
+  color: #888;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  color: var(--maroon);
+}

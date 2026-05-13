@@ -1,0 +1,38 @@
+.bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--yellow);
+  border-left: 4px solid var(--maroon);
+}
+
+@media (max-width: 600px) {
+  .bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.item {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  border-right: 1px solid var(--beige);
+}
+
+.item:last-child {
+  border-right: none;
+}
+
+.label {
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.value {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: var(--maroon);
+}

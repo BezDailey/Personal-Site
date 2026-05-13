@@ -1,0 +1,165 @@
+.card {
+  background: var(--yellow);
+  border-left: 4px solid var(--maroon);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  flex: 1;
+}
+
+.priorityBadge {
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  background: var(--beige);
+  border-radius: 50px;
+  padding: 2px 10px;
+  align-self: flex-start;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--maroon);
+  margin: 0;
+}
+
+.meta {
+  font-size: 0.85rem;
+  color: var(--red);
+  margin: 0;
+}
+
+.notes {
+  font-size: 0.8rem;
+  color: #5a3a3a;
+  margin: 0;
+  font-style: italic;
+}
+
+.balanceBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+}
+
+.balance {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--maroon);
+}
+
+.original {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.progressTrack {
+  height: 6px;
+  background: var(--beige);
+  width: 100%;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--maroon);
+  transition: width 0.4s ease;
+}
+
+.progressLabel {
+  font-size: 0.75rem;
+  color: var(--red);
+  margin: 0;
+  font-weight: bold;
+}
+
+.projection {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.85rem;
+  color: #5a3a3a;
+  flex-wrap: wrap;
+}
+
+.projection strong {
+  color: var(--maroon);
+}
+
+.actions {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  align-items: center;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--beige);
+}
+
+.actionBtn {
+  all: unset;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--red);
+  cursor: pointer;
+}
+
+.actionBtn:hover {
+  color: var(--maroon);
+  text-decoration: underline;
+}
+
+.actionBtn.danger {
+  color: #888;
+}
+
+.actionBtn.danger:hover {
+  color: var(--red);
+}
+
+.payments {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--beige);
+}
+
+.paymentRow {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.85rem;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
+.paymentDate {
+  color: var(--red);
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.paymentAmount {
+  color: var(--maroon);
+  font-weight: bold;
+}
+
+.paymentNote {
+  color: #5a3a3a;
+  font-style: italic;
+}

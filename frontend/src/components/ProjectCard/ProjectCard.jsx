@@ -7,7 +7,7 @@ const STATUS_LABELS = {
   planned: "Planned",
 };
 
-const ProjectCard = ({ name, description, tech, status, url }) => {
+const ProjectCard = ({ name, description, tech, status, url, onLaunch }) => {
   return (
     <div className={`${styles.card} ${styles[status]}`}>
       <div className={styles.statusRow}>
@@ -25,7 +25,11 @@ const ProjectCard = ({ name, description, tech, status, url }) => {
           ))}
         </div>
 
-        {url ? (
+        {onLaunch ? (
+          <button className={styles.launchBtn} onClick={onLaunch} type="button">
+            Launch →
+          </button>
+        ) : url ? (
           <a
             href={url}
             target="_blank"

@@ -1,0 +1,131 @@
+.card {
+  background: var(--yellow);
+  border-left: 4px solid var(--maroon);
+  padding: 1.5rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--maroon);
+  margin: 0 0 1.25rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+
+.strategyRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.strategyBtn {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0.75rem 1rem;
+  border: 2px solid var(--beige);
+  cursor: pointer;
+  transition: border-color 0.15s;
+  background: var(--yellow-background);
+}
+
+.strategyBtn:hover {
+  border-color: var(--red);
+}
+
+.strategyBtn.active {
+  border-color: var(--maroon);
+  background: var(--beige);
+}
+
+.strategyName {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--maroon);
+}
+
+.strategyDesc {
+  font-size: 0.75rem;
+  color: var(--red);
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: #5a3a3a;
+  margin: 0;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--beige);
+  background: var(--yellow-background);
+  transition: border-color 0.15s;
+}
+
+.inputRow:focus-within {
+  border-color: var(--maroon);
+}
+
+.prefix {
+  padding: 0.5rem 0.6rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--maroon);
+  background: var(--beige);
+}
+
+.input {
+  all: unset;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  color: #3a2a2a;
+  width: 100%;
+}
+
+.saveBtn {
+  all: unset;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--maroon);
+  border-bottom: 2px solid var(--maroon);
+  padding-bottom: 1px;
+  cursor: pointer;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.saveBtn:hover {
+  color: var(--red);
+  border-color: var(--red);
+}

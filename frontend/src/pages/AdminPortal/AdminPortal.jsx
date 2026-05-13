@@ -7,14 +7,14 @@ const projects = [
   {
     name: "Debt Payoff Tracker",
     description:
-      "Track and visualize your path to financial freedom. Manage multiple debts using snowball or avalanche payoff strategies.",
-    tech: ["React", "Flask", "Python"],
-    status: "in-progress",
-    url: null,
+      "Track multiple debts, choose avalanche or snowball strategies, log payments, run what-if calculators, and visualize your path to financial freedom.",
+    tech: ["Node.js", "Express", "React"],
+    status: "live",
+    internalRoute: "debt-tracker",
   },
 ];
 
-const AdminPortal = () => {
+const AdminPortal = ({ setActiveSection }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
     () => !!sessionStorage.getItem("adminToken")
   );
@@ -61,7 +61,15 @@ const AdminPortal = () => {
       </div>
       <div className={styles.grid}>
         {projects.map((project) => (
-          <ProjectCard key={project.name} {...project} />
+          <ProjectCard
+            key={project.name}
+            {...project}
+            onLaunch={
+              project.internalRoute
+                ? () => setActiveSection(project.internalRoute)
+                : null
+            }
+          />
         ))}
       </div>
     </div>

@@ -1,0 +1,140 @@
+.card {
+  background: var(--yellow);
+  border-left: 4px solid var(--maroon);
+  padding: 1.5rem;
+}
+
+.title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--maroon);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 1.25rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+
+.optional {
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #888;
+  font-size: 0.75rem;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--beige);
+  background: var(--yellow-background);
+}
+
+.inputRow:focus-within {
+  border-color: var(--maroon);
+}
+
+.affix {
+  padding: 0.5rem 0.6rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--maroon);
+  background: var(--beige);
+  flex-shrink: 0;
+}
+
+.input {
+  all: unset;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.95rem;
+  color: #3a2a2a;
+  width: 100%;
+  background: var(--yellow-background);
+  border: 1.5px solid var(--beige);
+}
+
+.inputRow .input {
+  border: none;
+}
+
+.input:focus {
+  border-color: var(--maroon);
+  outline: none;
+}
+
+.textarea {
+  all: unset;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  color: #3a2a2a;
+  background: var(--yellow-background);
+  border: 1.5px solid var(--beige);
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  font-family: inherit;
+  margin-bottom: 1rem;
+}
+
+.textarea:focus {
+  border-color: var(--maroon);
+  outline: none;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.submitBtn {
+  all: unset;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--maroon);
+  border-bottom: 2px solid var(--maroon);
+  padding-bottom: 1px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.submitBtn:hover {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.cancelBtn {
+  all: unset;
+  font-size: 0.9rem;
+  color: #888;
+  cursor: pointer;
+}
+
+.cancelBtn:hover {
+  color: var(--maroon);
+}
