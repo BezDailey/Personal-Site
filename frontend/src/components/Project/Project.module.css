@@ -1,32 +1,63 @@
-.icon {
-  width: 2rem;
-  filter: brightness(0%);
+.card {
+  background: var(--yellow);
+  border-left: 4px solid var(--maroon);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.project h2 {
-  margin: 0;
-  padding: 0;
-  color: var(--red);
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 4px 4px 0px var(--maroon);
 }
 
-.project h1 {
-  margin: 0;
-  padding: 0;
+.name {
+  font-size: 1.3rem;
+  font-weight: bold;
   color: var(--maroon);
+  margin: 0;
 }
 
-.project p {
+.year {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--red);
   margin: 0;
-  padding: 0;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
+}
+
+.description {
+  font-size: 0.9rem;
+  color: #3a2a2a;
+  margin: 0;
+  line-height: 1.6;
+}
+
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .skills {
   display: flex;
   flex-direction: row;
-  gap: 10px;
-  margin-top: 8px;
+  gap: 6px;
   flex-wrap: wrap;
-  margin-bottom: 0.5rem;
+}
+
+.icon {
+  width: 1.4rem;
+  filter: brightness(0%);
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.icon:hover {
+  opacity: 1;
 }
