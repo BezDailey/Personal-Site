@@ -2,156 +2,256 @@ require("dotenv").config();
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const path = require("path");
-const fs = require("fs");
+const { Pool } = require("pg");
 const { randomUUID } = require("crypto");
 
 const app = express();
 app.use(express.json());
 
-// ── Debt Tracker Data ────────────────────────────────────────────────────────
-const DATA_FILE = path.join(__dirname, "data.json");
-const DEFAULT_DATA = {
-  debts: [],
-  settings: { strategy: "avalanche", extraPayment: 0 },
-};
-
-function readData() {
-  if (!fs.existsSync(DATA_FILE)) {
-    fs.writeFileSync(DATA_FILE, JSON.stringify(DEFAULT_DATA, null, 2));
-    return JSON.parse(JSON.stringify(DEFAULT_DATA));
-  }
-  return JSON.parse(fs.readFileSync(DATA_FILE, "utf8"));
-}
-
-function writeData(data) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-}
-
-// GET all debts and settings
-app.get("/api/debts", (req, res) => {
-  res.json(readData());
+// ── Database ─────────────────────────────────────────────────────────────────
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 });
 
-// POST new debt
-app.post("/api/debts", (req, res) => {
+async function initDB() {
+  await pool.query(`
+    CREATE TABLE IF NOT EXISTS settings (
+      id INTEGER PRIMARY KEY DEFAULT 1,
+      strategy VARCHAR(20) DEFAULT 'avalanche',
+      extra_payment NUMERIC(10,2) DEFAULT 0,
+      CHECK (id = 1)
+    );
+
+    INSERT INTO settings (id, strategy, extra_payment)
+    VALUES (1, 'avalanche', 0)
+    ON CONFLICT (id) DO NOTHING;
+
+    CREATE TABLE IF NOT EXISTS debts (
+      id UUID PRIMARY KEY,
+      name VARCHAR(255) NOT NULL,
+      balance NUMERIC(12,2) NOT NULL,
+      original_balance NUMERIC(12,2) NOT NULL,
+      interest_rate NUMERIC(6,3) NOT NULL,
+      minimum_payment NUMERIC(10,2) NOT NULL,
+      notes TEXT DEFAULT '',
+      created_at TIMESTAMP DEFAULT NOW()
+    );
+
+    CREATE TABLE IF NOT EXISTS payments (
+      id UUID PRIMARY KEY,
+      debt_id UUID REFERENCES debts(id) ON DELETE CASCADE,
+      amount NUMERIC(10,2) NOT NULL,
+      date DATE NOT NULL,
+      note TEXT DEFAULT '',
+      created_at TIMESTAMP DEFAULT NOW()
+    );
+  `);
+}
+
+// ── DB Helpers ────────────────────────────────────────────────────────────────
+function rowToDebt(row, payments = []) {
+  return {
+    id: row.id,
+    name: row.name,
+    balance: parseFloat(row.balance),
+    originalBalance: parseFloat(row.original_balance),
+    interestRate: parseFloat(row.interest_rate),
+    minimumPayment: parseFloat(row.minimum_payment),
+    notes: row.notes || "",
+    payments,
+  };
+}
+
+function rowToPayment(row) {
+  return {
+    id: row.id,
+    amount: parseFloat(row.amount),
+    date: row.date.toISOString().split("T")[0],
+    note: row.note || "",
+  };
+}
+
+function rowToSettings(row) {
+  return {
+    strategy: row.strategy,
+    extraPayment: parseFloat(row.extra_payment),
+  };
+}
+
+async function getAllDebts() {
+  const [debtsRes, paymentsRes] = await Promise.all([
+    pool.query("SELECT * FROM debts ORDER BY created_at"),
+    pool.query("SELECT * FROM payments ORDER BY created_at"),
+  ]);
+
+  const paymentsByDebt = {};
+  for (const row of paymentsRes.rows) {
+    if (!paymentsByDebt[row.debt_id]) paymentsByDebt[row.debt_id] = [];
+    paymentsByDebt[row.debt_id].push(rowToPayment(row));
+  }
+
+  return debtsRes.rows.map((row) => rowToDebt(row, paymentsByDebt[row.id] || []));
+}
+
+async function getSettings() {
+  const res = await pool.query("SELECT * FROM settings WHERE id = 1");
+  return rowToSettings(res.rows[0]);
+}
+
+// ── Debt Routes ───────────────────────────────────────────────────────────────
+app.get("/api/debts", async (req, res) => {
+  try {
+    const [debts, settings] = await Promise.all([getAllDebts(), getSettings()]);
+    res.json({ debts, settings });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/api/debts", async (req, res) => {
   const { name, balance, interestRate, minimumPayment, notes } = req.body;
   if (!name || balance == null || interestRate == null || minimumPayment == null) {
     return res.status(400).json({ error: "Missing required fields" });
   }
-  const data = readData();
-  const debt = {
-    id: randomUUID(),
-    name: String(name).trim(),
-    balance: Number(balance),
-    originalBalance: Number(balance),
-    interestRate: Number(interestRate),
-    minimumPayment: Number(minimumPayment),
-    notes: notes ? String(notes).trim() : "",
-    payments: [],
-  };
-  data.debts.push(debt);
-  writeData(data);
-  res.status(201).json(debt);
+  try {
+    const id = randomUUID();
+    const result = await pool.query(
+      `INSERT INTO debts (id, name, balance, original_balance, interest_rate, minimum_payment, notes)
+       VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
+      [id, String(name).trim(), Number(balance), Number(balance),
+       Number(interestRate), Number(minimumPayment), notes ? String(notes).trim() : ""]
+    );
+    res.status(201).json(rowToDebt(result.rows[0], []));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// PUT update debt
-app.put("/api/debts/:id", (req, res) => {
-  const data = readData();
-  const debt = data.debts.find((d) => d.id === req.params.id);
-  if (!debt) return res.status(404).json({ error: "Debt not found" });
-
+app.put("/api/debts/:id", async (req, res) => {
   const { name, balance, interestRate, minimumPayment, notes } = req.body;
-  if (name != null) debt.name = String(name).trim();
-  if (balance != null) debt.balance = Number(balance);
-  if (interestRate != null) debt.interestRate = Number(interestRate);
-  if (minimumPayment != null) debt.minimumPayment = Number(minimumPayment);
-  if (notes != null) debt.notes = String(notes).trim();
+  try {
+    const result = await pool.query(
+      `UPDATE debts SET
+        name = COALESCE($1, name),
+        balance = COALESCE($2, balance),
+        interest_rate = COALESCE($3, interest_rate),
+        minimum_payment = COALESCE($4, minimum_payment),
+        notes = COALESCE($5, notes)
+       WHERE id = $6 RETURNING *`,
+      [
+        name != null ? String(name).trim() : null,
+        balance != null ? Number(balance) : null,
+        interestRate != null ? Number(interestRate) : null,
+        minimumPayment != null ? Number(minimumPayment) : null,
+        notes != null ? String(notes).trim() : null,
+        req.params.id,
+      ]
+    );
+    if (!result.rows.length) return res.status(404).json({ error: "Debt not found" });
 
-  writeData(data);
-  res.json(debt);
+    const paymentsRes = await pool.query(
+      "SELECT * FROM payments WHERE debt_id = $1 ORDER BY created_at",
+      [req.params.id]
+    );
+    res.json(rowToDebt(result.rows[0], paymentsRes.rows.map(rowToPayment)));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// DELETE debt
-app.delete("/api/debts/:id", (req, res) => {
-  const data = readData();
-  const idx = data.debts.findIndex((d) => d.id === req.params.id);
-  if (idx === -1) return res.status(404).json({ error: "Debt not found" });
-  data.debts.splice(idx, 1);
-  writeData(data);
-  res.json({ success: true });
+app.delete("/api/debts/:id", async (req, res) => {
+  try {
+    const result = await pool.query("DELETE FROM debts WHERE id = $1 RETURNING id", [req.params.id]);
+    if (!result.rows.length) return res.status(404).json({ error: "Debt not found" });
+    res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// POST log payment
-app.post("/api/debts/:id/payments", (req, res) => {
-  const data = readData();
-  const debt = data.debts.find((d) => d.id === req.params.id);
-  if (!debt) return res.status(404).json({ error: "Debt not found" });
-
+app.post("/api/debts/:id/payments", async (req, res) => {
   const { amount, date, note } = req.body;
   if (!amount || !date) return res.status(400).json({ error: "Amount and date required" });
+  try {
+    const paymentId = randomUUID();
+    await pool.query(
+      "INSERT INTO payments (id, debt_id, amount, date, note) VALUES ($1,$2,$3,$4,$5)",
+      [paymentId, req.params.id, Number(amount), date, note ? String(note).trim() : ""]
+    );
+    const debtRes = await pool.query(
+      "UPDATE debts SET balance = GREATEST(0, balance - $1) WHERE id = $2 RETURNING balance",
+      [Number(amount), req.params.id]
+    );
+    if (!debtRes.rows.length) return res.status(404).json({ error: "Debt not found" });
 
-  const payment = {
-    id: randomUUID(),
-    amount: Number(amount),
-    date: String(date),
-    note: note ? String(note).trim() : "",
-  };
-  debt.payments.push(payment);
-  debt.balance = Math.max(0, debt.balance - payment.amount);
-  writeData(data);
-  res.status(201).json({ payment, newBalance: debt.balance });
+    const paymentRes = await pool.query("SELECT * FROM payments WHERE id = $1", [paymentId]);
+    res.status(201).json({
+      payment: rowToPayment(paymentRes.rows[0]),
+      newBalance: parseFloat(debtRes.rows[0].balance),
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// DELETE payment
-app.delete("/api/debts/:id/payments/:paymentId", (req, res) => {
-  const data = readData();
-  const debt = data.debts.find((d) => d.id === req.params.id);
-  if (!debt) return res.status(404).json({ error: "Debt not found" });
+app.delete("/api/debts/:id/payments/:paymentId", async (req, res) => {
+  try {
+    const paymentRes = await pool.query(
+      "DELETE FROM payments WHERE id = $1 AND debt_id = $2 RETURNING amount",
+      [req.params.paymentId, req.params.id]
+    );
+    if (!paymentRes.rows.length) return res.status(404).json({ error: "Payment not found" });
 
-  const idx = debt.payments.findIndex((p) => p.id === req.params.paymentId);
-  if (idx === -1) return res.status(404).json({ error: "Payment not found" });
-
-  const [payment] = debt.payments.splice(idx, 1);
-  debt.balance += payment.amount;
-  writeData(data);
-  res.json({ success: true, newBalance: debt.balance });
+    const amount = parseFloat(paymentRes.rows[0].amount);
+    const debtRes = await pool.query(
+      "UPDATE debts SET balance = balance + $1 WHERE id = $2 RETURNING balance",
+      [amount, req.params.id]
+    );
+    res.json({ success: true, newBalance: parseFloat(debtRes.rows[0].balance) });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// PUT settings
-app.put("/api/settings", (req, res) => {
-  const data = readData();
+app.put("/api/settings", async (req, res) => {
   const { strategy, extraPayment } = req.body;
-  if (strategy === "avalanche" || strategy === "snowball") {
-    data.settings.strategy = strategy;
+  try {
+    const result = await pool.query(
+      `UPDATE settings SET
+        strategy = CASE WHEN $1 IN ('avalanche','snowball') THEN $1 ELSE strategy END,
+        extra_payment = COALESCE($2, extra_payment)
+       WHERE id = 1 RETURNING *`,
+      [strategy ?? null, extraPayment != null ? Number(extraPayment) : null]
+    );
+    res.json(rowToSettings(result.rows[0]));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
-  if (extraPayment != null) {
-    data.settings.extraPayment = Number(extraPayment);
-  }
-  writeData(data);
-  res.json(data.settings);
 });
 
-// ── Auth ─────────────────────────────────────────────────────────────────────
+// ── Auth ──────────────────────────────────────────────────────────────────────
 app.post("/api/login", (req, res) => {
   const { username, password } = req.body;
   if (
     username === process.env.ADMIN_USERNAME &&
     password === process.env.ADMIN_PASSWORD
   ) {
-    const token = jwt.sign({ username }, process.env.JWT_SECRET, {
-      expiresIn: "24h",
-    });
+    const token = jwt.sign({ username }, process.env.JWT_SECRET, { expiresIn: "24h" });
     return res.json({ token });
   }
   res.status(401).json({ error: "Invalid credentials" });
 });
 
-// ── Static + Catch-all ───────────────────────────────────────────────────────
+// ── Static + Catch-all ────────────────────────────────────────────────────────
 app.use(express.static(path.join(__dirname, "frontend/build")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "frontend/build", "index.html"));
 });
 
+// ── Start ─────────────────────────────────────────────────────────────────────
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+initDB()
+  .then(() => app.listen(PORT, () => console.log(`Server running on port ${PORT}`)))
+  .catch((err) => { console.error("DB init failed:", err); process.exit(1); });
