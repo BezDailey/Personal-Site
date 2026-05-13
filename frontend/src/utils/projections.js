@@ -1,4 +1,4 @@
-export function computeProjections(debts, strategy, extraPayment) {
+export function computeProjections(debts, strategy, extraPayment, lumpSum = 0, lumpSumDebtId = null) {
   if (!debts.length) return [];
 
   const working = debts.map((d) => ({
@@ -9,6 +9,16 @@ export function computeProjections(debts, strategy, extraPayment) {
     totalInterest: 0,
     payoffDate: null,
   }));
+
+  // Apply lump sum immediately to the chosen debt (or priority target if none chosen)
+  if (lumpSum > 0) {
+    const target = lumpSumDebtId
+      ? working.find((d) => d.id === lumpSumDebtId)
+      : null;
+    if (target) {
+      target.balance = Math.max(0, target.balance - lumpSum);
+    }
+  }
 
   const priority = [...working];
   if (strategy === "avalanche") {

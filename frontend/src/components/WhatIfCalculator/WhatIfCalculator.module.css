@@ -44,6 +44,99 @@
   font-weight: bold;
 }
 
+.divider {
+  border: none;
+  border-top: 1px solid var(--beige);
+  margin: 0.25rem 0;
+}
+
+.lumpSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.lumpHeading {
+  font-size: 0.85rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--maroon);
+  margin: 0;
+}
+
+.lumpSub {
+  font-size: 0.8rem;
+  color: #5a3a3a;
+  margin: 0;
+}
+
+.lumpFields {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+  min-width: 140px;
+}
+
+.fieldLabel {
+  font-size: 0.75rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid var(--beige);
+  background: var(--yellow-background);
+}
+
+.inputRow:focus-within {
+  border-color: var(--maroon);
+}
+
+.affix {
+  padding: 0.4rem 0.5rem;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: var(--maroon);
+  background: var(--beige);
+}
+
+.input {
+  all: unset;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  color: #3a2a2a;
+  width: 100%;
+}
+
+.select {
+  all: unset;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.9rem;
+  color: #3a2a2a;
+  background: var(--yellow-background);
+  border: 1.5px solid var(--beige);
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.select:focus {
+  border-color: var(--maroon);
+  outline: none;
+}
+
 .result {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

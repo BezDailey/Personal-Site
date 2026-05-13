@@ -4,15 +4,25 @@ import { computeProjections, fmt$, fmtMonth } from "../../utils/projections";
 
 const WhatIfCalculator = ({ debts, settings }) => {
   const [extra, setExtra] = useState(0);
+  const [lumpSum, setLumpSum] = useState("");
+  const [lumpSumDebtId, setLumpSumDebtId] = useState(() => debts[0]?.id || "");
 
   const baseProjections = useMemo(
     () => computeProjections(debts, settings.strategy, settings.extraPayment),
     [debts, settings]
   );
 
+  const lumpSumValue = parseFloat(lumpSum) || 0;
+
   const whatIfProjections = useMemo(
-    () => computeProjections(debts, settings.strategy, settings.extraPayment + extra),
-    [debts, settings, extra]
+    () => computeProjections(
+      debts,
+      settings.strategy,
+      settings.extraPayment + extra,
+      lumpSumValue,
+      lumpSumDebtId || null
+    ),
+    [debts, settings, extra, lumpSumValue, lumpSumDebtId]
   );
 
   const baseInterest = baseProjections.reduce((s, p) => s + p.totalInterest, 0);
@@ -37,9 +47,12 @@ const WhatIfCalculator = ({ debts, settings }) => {
       (basePayoff.getMonth() - whatIfPayoff.getMonth())
     : 0;
 
+  const showResult = (extra > 0 || lumpSumValue > 0) && debts.length > 0;
+
   return (
     <div className={styles.card}>
       <h2 className={styles.title}>What If I Pay More?</h2>
+
       <div className={styles.sliderRow}>
         <span className={styles.sliderLabel}>Extra monthly payment</span>
         <span className={styles.sliderValue}>{fmt$(extra)}</span>
@@ -58,7 +71,43 @@ const WhatIfCalculator = ({ debts, settings }) => {
         <span>$1,000</span>
       </div>
 
-      {extra > 0 && debts.length > 0 && (
+      <div className={styles.divider} />
+
+      <div className={styles.lumpSection}>
+        <p className={styles.lumpHeading}>One-Time Lump Sum</p>
+        <p className={styles.lumpSub}>What if I put a tax refund or bonus toward debt?</p>
+        <div className={styles.lumpFields}>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Amount</label>
+            <div className={styles.inputRow}>
+              <span className={styles.affix}>$</span>
+              <input
+                className={styles.input}
+                type="number"
+                min="0"
+                step="1"
+                placeholder="0"
+                value={lumpSum}
+                onChange={(e) => setLumpSum(e.target.value)}
+              />
+            </div>
+          </div>
+          <div className={styles.field}>
+            <label className={styles.fieldLabel}>Apply to</label>
+            <select
+              className={styles.select}
+              value={lumpSumDebtId}
+              onChange={(e) => setLumpSumDebtId(e.target.value)}
+            >
+              {debts.map((d) => (
+                <option key={d.id} value={d.id}>{d.name}</option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      {showResult && (
         <div className={styles.result}>
           <div className={styles.resultItem}>
             <span className={styles.resultLabel}>New debt-free date</span>
