@@ -8,14 +8,20 @@ const Experience = () => {
   const experiences = [
     {
       date: "Jun 2024 - Present",
-      title: "Solutions Engineering Analyst",
+      title: "Software Engineer",
       employer: "Deloitte",
       location: "Atlanta, GA",
-      description: "As a Solutions Engineering Analyst, I contributed to a firm initiative focused on leveraging a computer vision model to autonomously guide unmanned ground vehicles toward the nearest person. Additionally, I audited a organization's investment review process to identify opportunities for to integrate AI, ultimately optimizing the officiency and accuracy of investment evaluations.",
+      description: "At Deloitte, I design and develop full-stack applications using React and Node.js to support internal tools and client solutions. I contributed to a firm initiative using a computer vision model to autonomously guide unmanned ground vehicles, and audited an organization's investment review process to identify AI integration opportunities. I also build and optimize ETL pipelines using Databricks and PySpark to process large-scale datasets.",
       skills: [
-        "AI Integration",
+        "React",
+        "Node.js",
+        "Python",
+        "Databricks",
+        "PySpark",
         "Computer Vision",
-        "Process Auditing",
+        "AI Integration",
+        "ETL Pipelines",
+        "Full-Stack Development",
       ]
     },
     {
