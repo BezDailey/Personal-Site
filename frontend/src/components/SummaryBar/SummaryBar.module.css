@@ -1,3 +1,9 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 .bar {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -35,4 +41,62 @@
   font-size: 1.3rem;
   font-weight: bold;
   color: var(--maroon);
+}
+
+.countdown {
+  background: var(--maroon);
+  border-left: 4px solid var(--beige);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.countdownHero {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.countdownNumber {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--beige);
+  line-height: 1;
+}
+
+.countdownUnit {
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.countdownStats {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.countdownStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.countdownStatLabel {
+  font-size: 0.7rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--beige);
+  opacity: 0.7;
+}
+
+.countdownStatValue {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--yellow);
 }
