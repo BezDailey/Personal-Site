@@ -1,18 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
-
 .card {
   background: var(--yellow);
-  border-left: 4px solid var(--maroon);
-  padding: 1.5rem;
+  border-left: 3px solid var(--beige);
+  padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  box-shadow: 4px 4px 0px var(--maroon);
+  border-left-color: var(--red);
 }
 
 .statusRow {
@@ -49,9 +46,8 @@
 }
 
 .name {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.6rem;
-  font-weight: 900;
+  font-size: 1.25rem;
+  font-weight: bold;
   color: var(--maroon);
   margin: 0;
   line-height: 1.2;
