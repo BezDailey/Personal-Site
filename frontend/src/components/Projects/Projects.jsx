@@ -21,7 +21,7 @@ const Projects = () => {
     {
       name: "Reinforcement Learning Agent",
       year: "2026",
-      description: "Training an RL agent to solve a continuous control task using policy gradient methods. Builds on research from my time at Virginia Tech, where I worked on applying RL to real-world environments.",
+      description: "Training an RL agent to solve a continuous control task using policy gradient methods.",
       skills: [
         "Python",
         "PyTorch",
