@@ -11,7 +11,7 @@ import CustomHooksBlog from "../BlogPosts/CustomHooksBlog/CustomHooksBlog";
 
 const Blog = () => {
   return (
-    <div class={styles.blogPosts}>
+    <div className={styles.blogPosts}>
       <CustomHooksBlog />
       <Node1 />
       <MiniEssay />

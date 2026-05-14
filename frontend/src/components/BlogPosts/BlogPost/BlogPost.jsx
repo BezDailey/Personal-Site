@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styles from "./BlogPost.module.css";
-import Skill from "../../Skill/Skill";
 
 const BlogPost = ({ header, shortText, datePosted, topic, children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,21 +8,17 @@ const BlogPost = ({ header, shortText, datePosted, topic, children }) => {
 
   return (
     <div className={styles.templateBlog}>
-      <div className={styles.topHalf}>
-        <h1>{header}</h1>
-        <p className={styles.shortText}>{shortText}</p>
+      <div className={styles.blogMeta}>
+        <span className={styles.topic}>{topic}</span>
+        <span className={styles.date}>{datePosted}</span>
       </div>
+
+      <h2 className={styles.title}>{header}</h2>
+      <p className={styles.shortText}>{shortText}</p>
 
       <button onClick={toggleBlog} className={styles.templateBlogBtn}>
-        {isOpen ? "Hide blog ↑" : "Read blog →"}
+        {isOpen ? "Hide ↑" : "Read →"}
       </button>
-
-      <div className={styles.blogInfo}>
-        <div>
-          <Skill name={topic} />
-        </div>
-        <p>{datePosted}</p>
-      </div>
 
       {isOpen && (
         <div
