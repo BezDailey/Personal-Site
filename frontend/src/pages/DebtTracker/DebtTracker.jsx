@@ -9,7 +9,7 @@ import PaymentModal from "../../components/PaymentModal/PaymentModal";
 import WhatIfCalculator from "../../components/WhatIfCalculator/WhatIfCalculator";
 import AutopayModal from "../../components/AutopayModal/AutopayModal";
 
-const DebtTracker = () => {
+const DebtTracker = ({ setActiveSection }) => {
   const [debts, setDebts] = useState([]);
   const [settings, setSettings] = useState({ strategy: "avalanche", extraPayment: 0 });
   const [loading, setLoading] = useState(true);
@@ -118,6 +118,9 @@ const DebtTracker = () => {
   return (
     <div className={styles.page}>
       <div className={styles.header}>
+        <button className={styles.backBtn} onClick={() => setActiveSection("admin")} type="button">
+          ← Admin Portal
+        </button>
         <span className={styles.label}>— Debt Tracker</span>
         <h1 className={styles.title}>Payoff Planner</h1>
         <p className={styles.subtitle}>Track debts, choose a strategy, and visualize your path to freedom</p>

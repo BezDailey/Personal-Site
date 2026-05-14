@@ -12,6 +12,18 @@
   border-bottom: 1px solid var(--beige);
 }
 
+.backBtn {
+  all: unset;
+  font-size: 0.75rem;
+  color: #aaa;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.backBtn:hover {
+  color: var(--maroon);
+}
+
 .label {
   font-size: 0.8rem;
   font-weight: bold;

@@ -30,7 +30,7 @@ const Homepage = () => {
           {activeSection === "projects" && <Projects />}
           {activeSection === "blog" && <Blog />}
           {activeSection === "admin" && <AdminPortal setActiveSection={setActiveSection} />}
-          {activeSection === "debt-tracker" && <DebtTracker />}
+          {activeSection === "debt-tracker" && <DebtTracker setActiveSection={setActiveSection} />}
           {activeSection === "pomodoro" && <Pomodoro setActiveSection={setActiveSection} />}
         </section>
       </div>
