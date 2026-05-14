@@ -1,0 +1,466 @@
+/* ── Page Shell ──────────────────────────────────────────────────────────────── */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--beige);
+}
+
+.backBtn {
+  all: unset;
+  font-size: 0.75rem;
+  color: #aaa;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+}
+
+.backBtn:hover {
+  color: var(--maroon);
+}
+
+.titleRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* ── Two-column content layout ───────────────────────────────────────────────── */
+.content {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+/* ── Timer Panel ─────────────────────────────────────────────────────────────── */
+.timerPanel {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: var(--yellow);
+  border-left: 3px solid var(--beige);
+  padding: 1.5rem;
+}
+
+/* Mode selector tabs */
+.modeSelector {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.modeTab {
+  all: unset;
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.85rem;
+  border-radius: 50px;
+  background: transparent;
+  border: 1.5px solid var(--beige);
+  color: #9a6a6a;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.modeTab:hover:not(:disabled) {
+  border-color: var(--red);
+  color: var(--red);
+}
+
+.modeTab:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.activeTab {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+}
+
+.activeTab:hover:not(:disabled) {
+  background: var(--maroon);
+  border-color: var(--maroon);
+  color: #fff;
+}
+
+/* Countdown */
+.countdown {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 4.5rem;
+  font-weight: bold;
+  color: var(--maroon);
+  letter-spacing: 0.05em;
+  line-height: 1;
+  text-align: center;
+}
+
+/* Cycle dots */
+.cycleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.sessionDots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.dot {
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 2px solid var(--beige);
+  background: transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.dotFilled {
+  background: var(--maroon);
+  border-color: var(--maroon);
+}
+
+.cycleLabel {
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9a6a6a;
+}
+
+/* Task input */
+.taskInputRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.taskInput {
+  all: unset;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 0.875rem;
+  color: #3a1a1a;
+  background: transparent;
+  border-bottom: 1.5px solid var(--beige);
+  padding: 0.4rem 0;
+  transition: border-color 0.15s ease;
+}
+
+.taskInput::placeholder {
+  color: #b08a8a;
+}
+
+.taskInput:focus {
+  outline: none;
+  border-bottom-color: var(--red);
+}
+
+.taskInput:disabled {
+  color: #9a6a6a;
+  cursor: default;
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.controlBtn {
+  all: unset;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 0.15s ease;
+}
+
+.startBtn {
+  color: var(--maroon);
+  font-size: 1rem;
+}
+
+.startBtn:hover:not(:disabled) {
+  color: var(--red);
+}
+
+.pauseBtn {
+  color: var(--maroon);
+  font-size: 1rem;
+}
+
+.pauseBtn:hover {
+  color: var(--red);
+}
+
+.resetBtn {
+  color: #aaa;
+  font-size: 0.8rem;
+}
+
+.resetBtn:hover {
+  color: var(--maroon);
+}
+
+.disabledBtn {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.taskHint {
+  font-size: 0.72rem;
+  color: #b08a8a;
+  text-align: center;
+  margin: 0;
+  font-style: italic;
+}
+
+/* ── Metrics Panel ───────────────────────────────────────────────────────────── */
+.metricsPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.sectionLabel {
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+/* Summary metric cards */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.metricCard {
+  background: var(--yellow);
+  border-left: 3px solid var(--beige);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.metricValue {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: var(--maroon);
+  line-height: 1;
+}
+
+.metricName {
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #9a6a6a;
+}
+
+/* Task breakdown */
+.taskBreakdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.taskBreakdownRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--beige);
+  gap: 1rem;
+}
+
+.taskBreakdownName {
+  font-size: 0.875rem;
+  color: #3a1a1a;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.taskBreakdownCount {
+  font-size: 0.75rem;
+  font-weight: bold;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--maroon);
+  white-space: nowrap;
+}
+
+/* Session log */
+.sessionLog {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.emptyState {
+  font-size: 0.85rem;
+  color: #9a6a6a;
+  font-style: italic;
+  margin: 0;
+}
+
+.dateGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.dateHeader {
+  font-size: 0.72rem;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-family: 'Courier New', Courier, monospace;
+  color: #9a6a6a;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid var(--beige);
+  margin-bottom: 0.25rem;
+}
+
+.sessionEntry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--yellow);
+  border-left: 3px solid var(--beige);
+  padding: 0.65rem 1rem;
+  transition: border-color 0.15s ease;
+}
+
+.sessionEntry:hover {
+  border-left-color: var(--red);
+}
+
+.entryLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.entryTask {
+  font-size: 0.875rem;
+  color: #3a1a1a;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.entryMeta {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.modeBadge {
+  font-size: 0.65rem;
+  font-weight: bold;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 50px;
+  background: var(--beige);
+  color: var(--maroon);
+}
+
+.modeBadge.short_break,
+.modeBadge.long_break {
+  background: #e8e0d0;
+  color: #7a5a3a;
+}
+
+.entryTime {
+  font-size: 0.72rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: #9a6a6a;
+}
+
+.entryDuration {
+  font-size: 0.72rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: var(--maroon);
+  font-weight: bold;
+}
+
+.deleteBtn {
+  all: unset;
+  font-size: 1.1rem;
+  color: #ccc;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0.1rem 0.2rem;
+  transition: color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.deleteBtn:hover {
+  color: var(--red);
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .content {
+    flex-direction: column;
+  }
+
+  .timerPanel {
+    flex: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .metricsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown {
+    font-size: 3.5rem;
+  }
+
+  .metricsGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}

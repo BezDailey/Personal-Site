@@ -12,6 +12,14 @@ const projects = [
     status: "live",
     internalRoute: "debt-tracker",
   },
+  {
+    name: "Pomodoro Timer",
+    description:
+      "Focus sessions with task tracking, session logging, and daily metrics — all persisted to the database.",
+    tech: ["React", "PostgreSQL"],
+    status: "live",
+    internalRoute: "pomodoro",
+  },
 ];
 
 const AdminPortal = ({ setActiveSection }) => {

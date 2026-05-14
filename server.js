@@ -14,6 +14,17 @@ const pool = new Pool({
   ssl: process.env.DATABASE_URL ? { rejectUnauthorized: false } : false,
 });
 
+// ── Auth Middleware ───────────────────────────────────────────────────────────
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers["authorization"];
+  const token = authHeader && authHeader.split(" ")[1];
+  if (!token) return res.status(401).json({ error: "Unauthorized" });
+  jwt.verify(token, process.env.JWT_SECRET, (err) => {
+    if (err) return res.status(403).json({ error: "Forbidden" });
+    next();
+  });
+}
+
 async function initDB() {
   await pool.query(`
     CREATE TABLE IF NOT EXISTS settings (
@@ -51,6 +62,16 @@ async function initDB() {
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_amount NUMERIC(10,2);
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_day INTEGER;
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_last_paid DATE;
+
+    CREATE TABLE IF NOT EXISTS pomodoro_sessions (
+      id UUID PRIMARY KEY,
+      task VARCHAR(500) NOT NULL,
+      mode VARCHAR(20) NOT NULL,
+      duration_minutes INTEGER NOT NULL,
+      started_at TIMESTAMPTZ NOT NULL,
+      completed_at TIMESTAMPTZ NOT NULL,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
   `);
 }
 
@@ -87,6 +108,17 @@ function rowToSettings(row) {
   return {
     strategy: row.strategy,
     extraPayment: parseFloat(row.extra_payment),
+  };
+}
+
+function rowToSession(row) {
+  return {
+    id: row.id,
+    task: row.task,
+    mode: row.mode,
+    duration_minutes: parseInt(row.duration_minutes, 10),
+    started_at: row.started_at,
+    completed_at: row.completed_at,
   };
 }
 
@@ -297,6 +329,52 @@ app.put("/api/settings", async (req, res) => {
       [strategy ?? null, extraPayment != null ? Number(extraPayment) : null]
     );
     res.json(rowToSettings(result.rows[0]));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ── Pomodoro Routes ───────────────────────────────────────────────────────────
+app.get("/api/pomodoro/sessions", authenticateToken, async (req, res) => {
+  try {
+    const result = await pool.query(
+      "SELECT * FROM pomodoro_sessions ORDER BY completed_at DESC"
+    );
+    res.json(result.rows.map(rowToSession));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post("/api/pomodoro/sessions", authenticateToken, async (req, res) => {
+  const { task, mode, duration_minutes, started_at, completed_at } = req.body;
+  if (!task || !mode || !duration_minutes || !started_at || !completed_at) {
+    return res.status(400).json({ error: "Missing required fields" });
+  }
+  if (!["work", "short_break", "long_break"].includes(mode)) {
+    return res.status(400).json({ error: "Invalid mode" });
+  }
+  try {
+    const id = randomUUID();
+    const result = await pool.query(
+      `INSERT INTO pomodoro_sessions (id, task, mode, duration_minutes, started_at, completed_at)
+       VALUES ($1, $2, $3, $4, $5, $6) RETURNING *`,
+      [id, String(task).trim(), mode, Number(duration_minutes), started_at, completed_at]
+    );
+    res.status(201).json(rowToSession(result.rows[0]));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.delete("/api/pomodoro/sessions/:id", authenticateToken, async (req, res) => {
+  try {
+    const result = await pool.query(
+      "DELETE FROM pomodoro_sessions WHERE id = $1 RETURNING id",
+      [req.params.id]
+    );
+    if (!result.rows.length) return res.status(404).json({ error: "Session not found" });
+    res.json({ success: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

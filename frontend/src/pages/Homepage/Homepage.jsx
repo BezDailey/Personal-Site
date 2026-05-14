@@ -11,6 +11,7 @@ import Blog from "../../components/Blog/Blog";
 import Footer from "../../components/Footer/Footer";
 import AdminPortal from "../AdminPortal/AdminPortal";
 import DebtTracker from "../DebtTracker/DebtTracker";
+import Pomodoro from "../Pomodoro/Pomodoro";
 
 const Homepage = () => {
   const [activeSection, setActiveSection] = useState("experience");
@@ -30,6 +31,7 @@ const Homepage = () => {
           {activeSection === "blog" && <Blog />}
           {activeSection === "admin" && <AdminPortal setActiveSection={setActiveSection} />}
           {activeSection === "debt-tracker" && <DebtTracker />}
+          {activeSection === "pomodoro" && <Pomodoro setActiveSection={setActiveSection} />}
         </section>
       </div>
       <Footer setActiveSection={setActiveSection} />
