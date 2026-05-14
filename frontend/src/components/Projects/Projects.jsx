@@ -32,7 +32,7 @@ const Projects = () => {
     {
       name: "Real-Time Data Pipeline",
       year: "2026",
-      description: "End-to-end streaming pipeline that ingests, transforms, and surfaces data in a live dashboard. Applying patterns from ETL work at Deloitte using open-source tooling.",
+      description: "End-to-end streaming pipeline that ingests, transforms, and surfaces data in a live dashboard.",
       skills: [
         "Python",
         "PySpark",
