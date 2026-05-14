@@ -21,8 +21,10 @@ const Login = ({ onLogin }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.card}>
-        <span className={styles.label}>— Admin Portal</span>
-        <h1 className={styles.title}>Sign In</h1>
+        <div className={styles.cardHeader}>
+          <span className={styles.label}>— Admin Portal</span>
+          <h1 className={styles.title}>Sign In</h1>
+        </div>
 
         <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.field}>

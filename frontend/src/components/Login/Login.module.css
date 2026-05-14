@@ -1,24 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&display=swap');
-
 .wrapper {
   display: flex;
   justify-content: center;
-  padding: 3rem 0;
+  padding: 2rem 0;
 }
 
 .card {
   background: var(--yellow);
-  border-left: 4px solid var(--maroon);
+  border-left: 3px solid var(--beige);
   padding: 2.5rem;
   width: 100%;
   max-width: 380px;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.75rem;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: bold;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -26,9 +30,8 @@
 }
 
 .title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 2.5rem;
-  font-weight: 900;
+  font-size: 2rem;
+  font-weight: bold;
   color: var(--maroon);
   margin: 0;
   line-height: 1.1;
@@ -47,7 +50,7 @@
 }
 
 .fieldLabel {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   font-weight: bold;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -58,16 +61,19 @@
   background: var(--yellow-background);
   border: 1.5px solid var(--beige);
   border-radius: 0;
-  padding: 0.6rem 0.75rem;
+  padding: 0.65rem 0.75rem;
   font-size: 1rem;
   font-family: inherit;
   color: #3a2a2a;
   outline: none;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .input:focus {
   border-color: var(--maroon);
+  box-shadow: inset 3px 0 0 var(--maroon);
 }
 
 .error {
@@ -79,17 +85,25 @@
 
 .submitBtn {
   all: unset;
-  font-size: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+  text-align: center;
+  padding: 0.7rem 1rem;
+  font-size: 0.95rem;
   font-weight: bold;
+  background: var(--beige);
   color: var(--maroon);
-  border-bottom: 2px solid var(--maroon);
-  padding-bottom: 2px;
   cursor: pointer;
-  align-self: flex-start;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition: background 0.15s ease;
+  margin-top: 0.25rem;
 }
 
 .submitBtn:hover {
-  color: var(--red);
-  border-color: var(--red);
+  background: #e0c07a;
+  text-decoration: none;
+}
+
+.submitBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
