@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Jabez Dailey",
+  "name": "Jabez Dailey — Software Engineer",
+  "description": "Personal site and portfolio of Jabez Dailey, software engineer at Deloitte.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#ead196",
+  "background_color": "#f3edc8"
 }
