@@ -36,6 +36,20 @@ const Experience = () => {
       ],
     },
     {
+      date: "Jan 2024 - May 2024",
+      title: "Reinforcement Learning Researcher",
+      employer: "Virginia Tech",
+      location: "Atlanta, GA",
+      description: "Developed and updated the frontend of a reinforcement learning application for radio systems, collaborating with researchers to translate RL models into user-accessible tools. This role deepened my expertise in applied AI, human-computer interaction, and iterative development.",
+      skills: [
+        "React",
+        "Reinforcement Learning",
+        "Applied AI",
+        "Human-Computer Interaction",
+        "Radio Systems",
+      ],
+    },
+    {
       date: "May 2023 - August 2023",
       title: "Software Engineer Intern",
       employer: "Salesforce",
@@ -48,6 +62,20 @@ const Experience = () => {
         "TypeScript",
         "UI/UX Design",
         "Software Testing",
+      ],
+    },
+    {
+      date: "Aug 2023 - Dec 2023",
+      title: "Research Participant",
+      employer: "Spelman-Morehouse Directed Reading Program",
+      location: "Atlanta, GA",
+      description: "Collaborated with Dr. Sarah Chehade on a quantum computing research project exploring classical vs. quantum computation. Studied qubits, quantum logic gates, and quantum teleportation grounded in linear algebra and probability, gaining research experience bridging theoretical computer science and modern quantum technologies.",
+      skills: [
+        "Quantum Computing",
+        "Linear Algebra",
+        "Quantum Logic Gates",
+        "Quantum Teleportation",
+        "Research",
       ],
     },
     {

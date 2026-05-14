@@ -24,43 +24,28 @@ const Header = ({ setActiveSection, activeSection }) => {
       <div className={styles.links}>
         <button
           onClick={handleButtonClick}
-          value={"experience"}
-          className={getButtonClass("experience")}
+          value="experience"
+          className={`${styles.navBtn} ${getButtonClass("experience")}`}
         >
+          <span className={styles.dotOutline} />
           Experience
         </button>
         <button
           onClick={handleButtonClick}
-          className={getButtonClass("projects")}
           value="projects"
           type="button"
+          className={`${styles.navBtn} ${getButtonClass("projects")}`}
         >
+          <span className={styles.dotOutline} />
           Projects
         </button>
-        {/*
         <button
           onClick={handleButtonClick}
-          className={getButtonClass("certifications")}
-          value="certifications"
-          type="button"
-        >
-          Certifications
-        </button>
-        <button
-          onClick={handleButtonClick}
-          className={getButtonClass("technical_skills")}
-          value="technical_skills"
-          type="button"
-        >
-          Technical Skills
-        </button>
-        */}
-        <button
-          onClick={handleButtonClick}
-          className={getButtonClass("blog")}
           value="blog"
           type="button"
+          className={`${styles.navBtn} ${getButtonClass("blog")}`}
         >
+          <span className={styles.dotOutline} />
           Blog
         </button>
       </div>
