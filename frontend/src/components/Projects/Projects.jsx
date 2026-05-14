@@ -7,6 +7,19 @@ import Project from "../../components/Project/Project";
 const Projects = () => {
   const projects = [
     {
+      name: "Kingdom Call Global",
+      year: "2025 - Present",
+      description: "Production website for a Tampa-area ministry organization. Built with React 19 and Vite, featuring a custom design system (token-based CSS), React Router for multi-page navigation, and a photo gallery with keyboard navigation. Deployed and live on Heroku.",
+      skills: [
+        "React",
+        "Javascript",
+        "Tailwind CSS",
+        "React Router",
+      ],
+      github: "https://github.com/BezDailey/kingdom-call-global",
+      website: "https://www.kingdomcallglobal.com",
+    },
+    {
       name: "Personal Site",
       year: "2023 - Present",
       description: "My personal portfolio — built from scratch in React with no UI framework. Features a custom design system, a blog with expandable posts, and an admin portal for content management.",
@@ -63,6 +76,7 @@ const Projects = () => {
             description={project.description}
             skills={project.skills}
             github={project.github}
+            website={project.website}
             comingSoon={project.comingSoon}
           />
         ))}
