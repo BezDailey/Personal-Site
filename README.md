@@ -63,7 +63,11 @@ cd frontend && npm start  # React dev server
 ├── server.js               # Express server — API routes, auth, static serving
 ├── frontend/               # React app (Create React App)
 │   └── src/
-│       ├── pages/          # Full-page views (Homepage, DebtTracker, AdminPortal)
+│       ├── pages/
+│       │   ├── Homepage/       # Main layout and section state manager
+│       │   ├── AdminPortal/    # Auth-gated launchpad for admin tools
+│       │   ├── DebtTracker/    # Debt payoff planner
+│       │   └── Pomodoro/       # Pomodoro timer with session tracking
 │       ├── components/     # Reusable UI components
 │       └── utils/
 │           └── projections.js  # Debt payoff algorithm (avalanche/snowball)
@@ -83,7 +87,16 @@ cd frontend && npm start  # React dev server
 ### Admin Portal
 - Accessible via a discreet `⌘ Portal` link at the bottom of the sidebar (desktop) or footer (mobile)
 - Password-protected with JWT authentication (24h token stored in `sessionStorage`)
-- Launchpad for hosted side projects
+- Launchpad for hosted admin tools — each tool launches as its own full-page section with a back button
+
+### Pomodoro Timer
+- 25/5/15 minute Work / Short Break / Long Break modes
+- Task input required before starting a work session — carries through to the session log
+- Sessions logged to PostgreSQL on natural completion (resets are not logged)
+- Daily metrics: pomodoros completed, total focus time, per-task breakdown
+- Scrollable session log grouped by date with per-entry delete
+- Browser notifications on session completion
+- API routes are JWT-protected (`Authorization: Bearer <token>`)
 
 ### Debt Payoff Tracker
 - Add, edit, and delete debts

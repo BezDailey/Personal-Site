@@ -23,7 +23,8 @@ This is a single-page React app (Create React App) with no routing — navigatio
 - `App.js` renders `Homepage`
 - `Homepage` holds `activeSection` state and passes `setActiveSection` to `Header`
 - `Header` renders nav buttons that call `setActiveSection` via `event.currentTarget.value` (not `event.target.value` — buttons have inner spans so target may be a child element)
-- `Homepage` conditionally renders `<Experience>`, `<Projects>`, or `<Blog>` based on `activeSection`
+- `Homepage` conditionally renders sections based on `activeSection`: `"experience"`, `"projects"`, `"blog"`, `"admin"`, `"debt-tracker"`, `"pomodoro"`
+- Admin-only pages (`DebtTracker`, `Pomodoro`) receive `setActiveSection` as a prop and render a `← Admin Portal` back button that calls `setActiveSection("admin")`
 
 **Two-column layout (desktop ≥1200px):**
 - `Homepage` renders a `.layout` flex row containing `.sidebar` and `.section`
@@ -34,10 +35,21 @@ This is a single-page React app (Create React App) with no routing — navigatio
 **Blog post pattern:**
 Each blog post is a standalone component in `src/components/BlogPosts/<PostName>/`. New posts should use the shared `BlogPost` wrapper component (`src/components/BlogPosts/BlogPost/BlogPost.jsx`), which accepts `header`, `shortText`, `datePosted`, `topic` props and renders children as the expanded content. After creating a new post component, add it to `src/components/Blog/Blog.jsx` (newest first).
 
+**Admin portal pages:**
+`AdminPortal` renders a grid of `ProjectCard` components from a hardcoded `projects` array in `AdminPortal.jsx`. Each card can link to an internal route (via `internalRoute`) or an external URL. To add a new tool, add an entry to that array and a corresponding render case in `Homepage.jsx`.
+
 **Data as JSX props (not a CMS):**
 Experience entries live as a hardcoded array in `Experience.jsx`; projects live in `Projects.jsx`. To add/update content, edit those arrays directly.
 
-**Styling:** CSS Modules (`.module.css`) colocated with each component. No global CSS framework. Note: tag selectors (e.g. `button`, `h1`) in CSS Modules are NOT scoped — only class and ID selectors get hashed. The global `button { all: unset }` rule lives in `Header.module.css` and applies sitewide.
+**Styling:** CSS Modules (`.module.css`) colocated with each component. No global CSS framework. Note: tag selectors (e.g. `button`, `h1`) in CSS Modules are NOT scoped — only class and ID selectors get hashed. The global `button { all: unset }` rule lives in `Header.module.css` and applies sitewide. A `button:hover { text-decoration: underline }` rule also applies globally — override with `text-decoration: none` on specific hover selectors when unwanted.
+
+**Backend API routes:**
+- `/api/debts` — debt CRUD (no auth required)
+- `/api/settings` — payoff strategy settings (no auth required)
+- `/api/login` — returns JWT on valid credentials
+- `/api/pomodoro/sessions` — pomodoro session CRUD (JWT required via `authenticateToken` middleware)
+
+New admin-only API routes should use the `authenticateToken` middleware. Pass the token from `sessionStorage.getItem("adminToken")` in an `Authorization: Bearer <token>` header.
 
 ---
 
