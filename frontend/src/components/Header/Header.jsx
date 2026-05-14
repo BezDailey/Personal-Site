@@ -11,14 +11,16 @@ const Header = ({ setActiveSection, activeSection }) => {
   };
 
   const handleButtonClick = (event) => {
-    setActiveSection(event.target.value);
+    setActiveSection(event.currentTarget.value);
   };
 
   return (
     <header className={styles.container}>
-      <h1 className={styles.header_title}>Jabez Dailey</h1>
-      <h2 className={styles.header_text}>Software Engineer @ Deloitte</h2>
-      <p>
+      <div className={styles.identity}>
+        <h1 className={styles.header_title}>Jabez Dailey</h1>
+        <h2 className={styles.header_text}>Software Engineer · Deloitte</h2>
+      </div>
+      <p className={styles.bio}>
         Full-stack engineer at Deloitte, building apps, ETL pipelines, and AI tools. CS grad from Morehouse; starting GT OMSCS Fall 2026.
       </p>
       <div className={styles.links}>
@@ -28,7 +30,10 @@ const Header = ({ setActiveSection, activeSection }) => {
           className={`${styles.navBtn} ${getButtonClass("experience")}`}
         >
           <span className={styles.dotOutline} />
-          Experience
+          <span className={styles.navContent}>
+            <span className={styles.navLabel}>Experience</span>
+            <span className={styles.navSub}>Work history</span>
+          </span>
         </button>
         <button
           onClick={handleButtonClick}
@@ -37,7 +42,10 @@ const Header = ({ setActiveSection, activeSection }) => {
           className={`${styles.navBtn} ${getButtonClass("projects")}`}
         >
           <span className={styles.dotOutline} />
-          Projects
+          <span className={styles.navContent}>
+            <span className={styles.navLabel}>Projects</span>
+            <span className={styles.navSub}>Things I've built</span>
+          </span>
         </button>
         <button
           onClick={handleButtonClick}
@@ -46,7 +54,10 @@ const Header = ({ setActiveSection, activeSection }) => {
           className={`${styles.navBtn} ${getButtonClass("blog")}`}
         >
           <span className={styles.dotOutline} />
-          Blog
+          <span className={styles.navContent}>
+            <span className={styles.navLabel}>Blog</span>
+            <span className={styles.navSub}>Writing</span>
+          </span>
         </button>
       </div>
       <div className={styles.icons}>
