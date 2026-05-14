@@ -245,7 +245,7 @@ const Pomodoro = ({ setActiveSection }) => {
             </span>
           </div>
 
-          <div className={styles.taskInputRow}>
+          {mode === "work" && <div className={styles.taskInputRow}>
             <input
               className={styles.taskInput}
               type="text"
@@ -255,7 +255,7 @@ const Pomodoro = ({ setActiveSection }) => {
               disabled={isRunning}
               maxLength={200}
             />
-          </div>
+          </div>}
 
           <div className={styles.controls}>
             {!isRunning ? (
