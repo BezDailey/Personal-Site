@@ -60,3 +60,21 @@
 .icon:hover {
   opacity: 1;
 }
+
+.cardComingSoon {
+  border-left: 3px dashed var(--beige);
+  opacity: 0.8;
+}
+
+.cardComingSoon:hover {
+  border-left-color: var(--red);
+  opacity: 1;
+}
+
+.comingSoonBadge {
+  font-size: 0.72rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--red);
+}

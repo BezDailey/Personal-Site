@@ -19,22 +19,37 @@ const Projects = () => {
       github: "https://github.com/BezDailey/Personal-Site",
     },
     {
-      name: "Threaded Producer Consumer Lab",
-      year: "2023",
-      description: "Built a concurrent producer-consumer pipeline in C using POSIX threads, mutexes, and semaphores. Focused on safe shared-memory access and avoiding race conditions under high throughput.",
+      name: "Reinforcement Learning Agent",
+      year: "2026",
+      description: "Training an RL agent to solve a continuous control task using policy gradient methods. Builds on research from my time at Virginia Tech, where I worked on applying RL to real-world environments.",
       skills: [
-        "C",
+        "Python",
+        "PyTorch",
+        "OpenAI Gym",
       ],
-      github: "https://github.com/BezDailey/Threaded-Producer-Consumer-Lab",
+      comingSoon: true,
     },
     {
-      name: "HTTP Server",
-      year: "2023",
-      description: "Implemented an HTTP/1.1 server from scratch in C. Handles GET requests, parses headers, serves static files, and returns proper status codes — no frameworks, just sockets.",
+      name: "Real-Time Data Pipeline",
+      year: "2026",
+      description: "End-to-end streaming pipeline that ingests, transforms, and surfaces data in a live dashboard. Applying patterns from ETL work at Deloitte using open-source tooling.",
       skills: [
-        "C"
+        "Python",
+        "PySpark",
+        "Docker",
       ],
-      github: "https://github.com/BezDailey/HttpServer",
+      comingSoon: true,
+    },
+    {
+      name: "Computer Vision Web App",
+      year: "2026",
+      description: "A web app that runs object detection on uploaded images or a live camera feed. Packages a fine-tuned vision model behind a REST API with a React frontend.",
+      skills: [
+        "Python",
+        "React",
+        "PyTorch",
+      ],
+      comingSoon: true,
     },
   ];
   return (
@@ -48,6 +63,7 @@ const Projects = () => {
             description={project.description}
             skills={project.skills}
             github={project.github}
+            comingSoon={project.comingSoon}
           />
         ))}
     </div>
