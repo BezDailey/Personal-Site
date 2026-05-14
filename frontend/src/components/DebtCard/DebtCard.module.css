@@ -1,10 +1,15 @@
 .card {
   background: var(--yellow);
-  border-left: 4px solid var(--maroon);
+  border-left: 3px solid var(--beige);
   padding: 1.25rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  transition: border-color 0.15s ease;
+}
+
+.card:hover {
+  border-left-color: var(--red);
 }
 
 .top {
@@ -166,6 +171,7 @@
 }
 
 .paymentDate {
+  font-family: 'Courier New', Courier, monospace;
   color: var(--red);
   font-weight: bold;
   flex-shrink: 0;

@@ -54,7 +54,7 @@
 
 .empty {
   background: var(--yellow);
-  border-left: 4px solid var(--beige);
+  border-left: 3px solid var(--beige);
   padding: 2rem 1.5rem;
 }
 
@@ -78,7 +78,7 @@
   box-sizing: border-box;
   padding: 1rem 1.5rem;
   background: var(--yellow);
-  border-left: 4px solid var(--beige);
+  border-left: 3px solid var(--beige);
   font-size: 0.95rem;
   font-weight: bold;
   color: var(--red);

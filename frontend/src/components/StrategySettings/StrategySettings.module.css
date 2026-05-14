@@ -1,13 +1,13 @@
 .card {
   background: var(--yellow);
-  border-left: 4px solid var(--maroon);
+  border-left: 3px solid var(--beige);
   padding: 1.5rem;
 }
 
 .title {
   font-size: 1rem;
   font-weight: bold;
-  color: var(--maroon);
+  color: var(--red);
   margin: 0 0 1.25rem 0;
   text-transform: uppercase;
   letter-spacing: 0.06em;

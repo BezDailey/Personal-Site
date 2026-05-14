@@ -1,6 +1,6 @@
 .card {
   background: var(--yellow);
-  border-left: 4px solid var(--maroon);
+  border-left: 3px solid var(--beige);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@
 .title {
   font-size: 1rem;
   font-weight: bold;
-  color: var(--maroon);
+  color: var(--red);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin: 0;

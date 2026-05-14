@@ -8,7 +8,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   background: var(--yellow);
-  border-left: 4px solid var(--maroon);
+  border-left: 3px solid var(--beige);
 }
 
 @media (max-width: 600px) {
@@ -45,7 +45,7 @@
 
 .countdown {
   background: var(--maroon);
-  border-left: 4px solid var(--beige);
+  border-left: 3px solid var(--beige);
   padding: 1.25rem 1.5rem;
   display: flex;
   align-items: center;
