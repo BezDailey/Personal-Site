@@ -103,7 +103,6 @@
 
 /* Countdown */
 .countdown {
-  font-family: 'Courier New', Courier, monospace;
   font-size: 4.5rem;
   font-weight: bold;
   color: var(--maroon);
