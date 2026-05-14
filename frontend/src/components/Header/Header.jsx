@@ -19,7 +19,7 @@ const Header = ({ setActiveSection, activeSection }) => {
       <h1 className={styles.header_title}>Jabez Dailey</h1>
       <h2 className={styles.header_text}>Software Engineer @ Deloitte</h2>
       <p>
-        Computer Science graduate from Morehouse College building full-stack applications, ETL pipelines, and AI-powered tools. Currently working at Deloitte and starting Georgia Tech's OMSCS in Fall 2026.
+        Full-stack engineer at Deloitte, building apps, ETL pipelines, and AI tools. CS grad from Morehouse; starting GT OMSCS Fall 2026.
       </p>
       <div className={styles.links}>
         <button
@@ -80,6 +80,12 @@ const Header = ({ setActiveSection, activeSection }) => {
           <img className={styles.icon} src={linkedIn} alt="LinkedIn Icon" />
         </a>
       </div>
+      <button
+        className={styles.adminLink}
+        onClick={() => setActiveSection("admin")}
+      >
+        ⌘ Portal
+      </button>
     </header>
   );
 };

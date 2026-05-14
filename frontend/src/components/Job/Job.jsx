@@ -5,7 +5,7 @@ import styles from "./Job.module.css";
 import Skill from "../Skill/Skill";
 const Job = ({date, title, employer, location, description, skills}) => {
   return (
-    <div>
+    <div className={styles.container}>
       <h3 className={styles.date}>{date}</h3>
       <h1 className={styles.title}>{title}</h1>
       <h2 className={styles.employer}>

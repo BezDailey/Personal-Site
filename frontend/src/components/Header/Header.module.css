@@ -46,6 +46,10 @@
   margin-bottom: 1rem;
 }
 
+.adminLink {
+  display: none;
+}
+
 .active {
   color: var(--maroon);
   font-weight: bold;
@@ -80,4 +84,40 @@ button:hover {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+  .container {
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+  }
+
+  .links {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .icons {
+    margin-top: auto;
+    padding-bottom: 1rem;
+  }
+
+  .adminLink {
+    display: block;
+    font-size: 0.75rem;
+    color: #aaa;
+    letter-spacing: 0.04em;
+    padding-bottom: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+  }
+
+  .adminLink:hover {
+    color: var(--maroon);
+    text-decoration: none;
+  }
 }

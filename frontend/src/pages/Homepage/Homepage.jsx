@@ -17,17 +17,21 @@ const Homepage = () => {
 
   return (
     <div>
-      <Header
-        activeSection={activeSection}
-        setActiveSection={setActiveSection}
-      />
-      <section className={styles.section}>
-        {activeSection === "experience" && <Experience />}
-        {activeSection === "projects" && <Projects />}
-        {activeSection === "blog" && <Blog />}
-        {activeSection === "admin" && <AdminPortal setActiveSection={setActiveSection} />}
-        {activeSection === "debt-tracker" && <DebtTracker />}
-      </section>
+      <div className={styles.layout}>
+        <div className={styles.sidebar}>
+          <Header
+            activeSection={activeSection}
+            setActiveSection={setActiveSection}
+          />
+        </div>
+        <section className={styles.section}>
+          {activeSection === "experience" && <Experience />}
+          {activeSection === "projects" && <Projects />}
+          {activeSection === "blog" && <Blog />}
+          {activeSection === "admin" && <AdminPortal setActiveSection={setActiveSection} />}
+          {activeSection === "debt-tracker" && <DebtTracker />}
+        </section>
+      </div>
       <Footer setActiveSection={setActiveSection} />
     </div>
   );
