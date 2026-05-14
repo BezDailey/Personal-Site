@@ -45,12 +45,12 @@ Live at **[jabezdailey.com](https://jabezdailey.com)**
    ```bash
    npm run dev
    ```
-   - React app: http://localhost:3000 (proxies `/api` to port 3001)
-   - Express API: http://localhost:3001
+   - React app: `http://localhost:3000` (proxies `/api` to port 3001)
+   - Express API: `http://localhost:3001`
 
 Or run them separately:
 ```bash
-node server.js          # API server
+node server.js            # API server
 cd frontend && npm start  # React dev server
 ```
 
@@ -76,11 +76,12 @@ cd frontend && npm start  # React dev server
 ## Features
 
 ### Personal Site
-- Experience, Projects, and Blog sections with no client-side routing (state-driven via `useState`)
-- Blog posts use a shared `BlogPost` wrapper component
+- Two-column layout on desktop (≥1200px): sticky sidebar with identity + nav, scrollable content on the right
+- Experience, Projects, and Blog sections — no client-side routing, state-driven via `useState`
+- Blog posts use a shared `BlogPost` wrapper component with expand/collapse
 
 ### Admin Portal
-- Accessible via a discreet link in the footer
+- Accessible via a discreet `⌘ Portal` link at the bottom of the sidebar (desktop) or footer (mobile)
 - Password-protected with JWT authentication (24h token stored in `sessionStorage`)
 - Launchpad for hosted side projects
 
@@ -90,7 +91,7 @@ cd frontend && npm start  # React dev server
 - **Avalanche** (highest APR first) and **Snowball** (lowest balance first) payoff strategies
 - Extra monthly payment allocation to the priority target
 - **Autopay** — configure a monthly amount and day; payments are auto-logged on page load when due
-- **What If calculator** — slider for extra monthly payment + one-time lump sum (e.g. tax refund) with projected payoff date, months saved, and interest saved
+- **What If calculator** — slider for extra monthly payment + one-time lump sum with projected payoff date, months saved, and interest saved
 - Summary bar with months-to-freedom countdown, target date, and total eliminated
 
 ---
