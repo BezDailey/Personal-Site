@@ -7,7 +7,7 @@ const Job = ({date, title, employer, location, description, skills}) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.date}>{date}</h3>
-      <h1 className={styles.title}>{title}</h1>
+      <h2 className={styles.title}>{title}</h2>
       <h2 className={styles.employer}>
         {employer} &#x2022; {location}
       </h2>
