@@ -12,6 +12,15 @@ const DebtForm = ({ initial, onSubmit, onCancel }) => {
 
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
 
+  const suggestedMin = (() => {
+    const bal = parseFloat(form.balance);
+    const rate = parseFloat(form.interestRate);
+    if (!bal || !rate || bal <= 0 || rate <= 0) return null;
+    const monthlyInterest = bal * (rate / 100 / 12);
+    const suggested = Math.max(10, bal * 0.01 + monthlyInterest);
+    return suggested.toFixed(2);
+  })();
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({
@@ -85,7 +94,7 @@ const DebtForm = ({ initial, onSubmit, onCancel }) => {
                 type="number"
                 min="0"
                 step="0.01"
-                placeholder="0.00"
+                placeholder={suggestedMin ? `~${suggestedMin} (est.)` : "0.00"}
                 value={form.minimumPayment}
                 onChange={set("minimumPayment")}
                 required
