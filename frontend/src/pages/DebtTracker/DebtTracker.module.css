@@ -96,3 +96,33 @@
   font-size: 0.9rem;
   padding: 2rem 0;
 }
+
+.viewSwitcher {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--beige);
+}
+
+.viewBtn {
+  all: unset;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--red);
+  padding: 0.5rem 1.25rem 0.5rem 0;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.15s;
+}
+
+.viewBtn:hover {
+  color: var(--maroon);
+  text-decoration: none;
+}
+
+.viewBtnActive {
+  color: var(--maroon);
+  border-bottom-color: var(--maroon);
+}

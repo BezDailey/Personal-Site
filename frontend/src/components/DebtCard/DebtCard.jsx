@@ -2,7 +2,12 @@ import React, { useState } from "react";
 import styles from "./DebtCard.module.css";
 import { fmt$, fmtMonth } from "../../utils/projections";
 
-const DebtCard = ({ debt, projection, priority, onPay, onEdit, onDelete, onAutopay }) => {
+const ownerLabel = (owners) => {
+  if (!owners || owners.length === 0) return null;
+  return owners.length === 1 ? owners[0] : owners.join(" & ");
+};
+
+const DebtCard = ({ debt, projection, priority, showOwner, onPay, onEdit, onDelete, onAutopay }) => {
   const [showPayments, setShowPayments] = useState(false);
   const progress = debt.originalBalance > 0
     ? Math.min(100, Math.round(((debt.originalBalance - debt.balance) / debt.originalBalance) * 100))
@@ -18,6 +23,9 @@ const DebtCard = ({ debt, projection, priority, onPay, onEdit, onDelete, onAutop
               <span className={styles.autopayBadge}>
                 Autopay {fmt$(debt.autopay.amount)}/mo · Day {debt.autopay.dayOfMonth}
               </span>
+            )}
+            {showOwner && ownerLabel(debt.owners) && (
+              <span className={styles.ownerBadge}>{ownerLabel(debt.owners)}</span>
             )}
           </div>
           <h3 className={styles.name}>{debt.name}</h3>

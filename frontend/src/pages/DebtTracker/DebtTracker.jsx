@@ -17,6 +17,7 @@ const DebtTracker = ({ setActiveSection }) => {
   const [editingDebt, setEditingDebt] = useState(null);
   const [payingDebt, setPayingDebt] = useState(null);
   const [autopayDebt, setAutopayDebt] = useState(null);
+  const [activeView, setActiveView] = useState("Household");
 
   useEffect(() => {
     fetch("/api/debts")
@@ -28,9 +29,16 @@ const DebtTracker = ({ setActiveSection }) => {
       });
   }, []);
 
+  const filteredDebts = useMemo(() =>
+    activeView === "Household"
+      ? debts
+      : debts.filter((d) => d.owners.includes(activeView)),
+    [debts, activeView]
+  );
+
   const projections = useMemo(
-    () => computeProjections(debts, settings.strategy, settings.extraPayment),
-    [debts, settings]
+    () => computeProjections(filteredDebts, settings.strategy, settings.extraPayment),
+    [filteredDebts, settings]
   );
 
   const projectionMap = useMemo(() => {
@@ -40,12 +48,12 @@ const DebtTracker = ({ setActiveSection }) => {
   }, [projections]);
 
   const sortedDebts = useMemo(() =>
-    [...debts].sort((a, b) =>
+    [...filteredDebts].sort((a, b) =>
       settings.strategy === "avalanche"
         ? b.interestRate - a.interestRate
         : a.balance - b.balance
     ),
-    [debts, settings.strategy]
+    [filteredDebts, settings.strategy]
   );
 
   const priorityId = useMemo(() =>
@@ -131,8 +139,21 @@ const DebtTracker = ({ setActiveSection }) => {
         <p className={styles.subtitle}>Track debts, choose a strategy, and visualize your path to freedom</p>
       </div>
 
-      {debts.length > 0 && (
-        <SummaryBar debts={debts} projections={projections} />
+      <div className={styles.viewSwitcher}>
+        {["Jabez", "August", "Household"].map((view) => (
+          <button
+            key={view}
+            className={`${styles.viewBtn} ${activeView === view ? styles.viewBtnActive : ""}`}
+            onClick={() => { setActiveView(view); setShowForm(false); setEditingDebt(null); }}
+            type="button"
+          >
+            {view}
+          </button>
+        ))}
+      </div>
+
+      {filteredDebts.length > 0 && (
+        <SummaryBar debts={filteredDebts} projections={projections} />
       )}
 
       <StrategySettings settings={settings} onSave={handleSaveSettings} />
@@ -144,6 +165,7 @@ const DebtTracker = ({ setActiveSection }) => {
             debt={debt}
             projection={projectionMap[debt.id]}
             priority={debt.id === priorityId ? 1 : 0}
+            showOwner={activeView === "Household"}
             onPay={() => setPayingDebt(debt)}
             onAutopay={() => setAutopayDebt(debt)}
             onEdit={() => { setEditingDebt(debt); setShowForm(false); }}
@@ -151,10 +173,14 @@ const DebtTracker = ({ setActiveSection }) => {
           />
         ))}
 
-        {debts.length === 0 && !showForm && (
+        {filteredDebts.length === 0 && !showForm && (
           <div className={styles.empty}>
             <p className={styles.emptyTitle}>No debts yet</p>
-            <p className={styles.emptySub}>Add your first debt below to start planning your payoff.</p>
+            <p className={styles.emptySub}>
+              {activeView === "Household"
+                ? "Add your first debt below to start planning your payoff."
+                : `No debts assigned to ${activeView} yet.`}
+            </p>
           </div>
         )}
       </div>
@@ -169,6 +195,7 @@ const DebtTracker = ({ setActiveSection }) => {
         <DebtForm
           onSubmit={handleAddDebt}
           onCancel={() => setShowForm(false)}
+          presetOwners={activeView === "Household" ? [] : [activeView]}
         />
       ) : (
         <button className={styles.addBtn} onClick={() => setShowForm(true)} type="button">
@@ -176,8 +203,8 @@ const DebtTracker = ({ setActiveSection }) => {
         </button>
       )}
 
-      {debts.length > 0 && (
-        <WhatIfCalculator debts={debts} settings={settings} />
+      {filteredDebts.length > 0 && (
+        <WhatIfCalculator debts={filteredDebts} settings={settings} />
       )}
 
       {payingDebt && (

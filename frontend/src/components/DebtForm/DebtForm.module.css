@@ -138,3 +138,38 @@
 .cancelBtn:hover {
   color: var(--maroon);
 }
+
+.ownerRow {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.ownerLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: #3a2a2a;
+  cursor: pointer;
+}
+
+.ownerCheck {
+  accent-color: var(--maroon);
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+
+.labelError {
+  color: var(--red);
+}
+
+.errorHint {
+  font-weight: normal;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.75rem;
+  color: var(--red);
+}

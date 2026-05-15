@@ -62,6 +62,7 @@ async function initDB() {
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_amount NUMERIC(10,2);
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_day INTEGER;
     ALTER TABLE debts ADD COLUMN IF NOT EXISTS autopay_last_paid DATE;
+    ALTER TABLE debts ADD COLUMN IF NOT EXISTS owners TEXT[] DEFAULT '{}';
 
     CREATE TABLE IF NOT EXISTS pomodoro_sessions (
       id UUID PRIMARY KEY,
@@ -85,6 +86,7 @@ function rowToDebt(row, payments = []) {
     interestRate: parseFloat(row.interest_rate),
     minimumPayment: parseFloat(row.minimum_payment),
     notes: row.notes || "",
+    owners: row.owners || [],
     payments,
     autopay: {
       enabled: row.autopay_enabled || false,
@@ -186,17 +188,18 @@ app.get("/api/debts", async (req, res) => {
 });
 
 app.post("/api/debts", async (req, res) => {
-  const { name, balance, interestRate, minimumPayment, notes } = req.body;
+  const { name, balance, interestRate, minimumPayment, notes, owners } = req.body;
   if (!name || balance == null || interestRate == null || minimumPayment == null) {
     return res.status(400).json({ error: "Missing required fields" });
   }
   try {
     const id = randomUUID();
+    const ownersArr = Array.isArray(owners) ? owners : [];
     const result = await pool.query(
-      `INSERT INTO debts (id, name, balance, original_balance, interest_rate, minimum_payment, notes)
-       VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING *`,
+      `INSERT INTO debts (id, name, balance, original_balance, interest_rate, minimum_payment, notes, owners)
+       VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING *`,
       [id, String(name).trim(), Number(balance), Number(balance),
-       Number(interestRate), Number(minimumPayment), notes ? String(notes).trim() : ""]
+       Number(interestRate), Number(minimumPayment), notes ? String(notes).trim() : "", ownersArr]
     );
     res.status(201).json(rowToDebt(result.rows[0], []));
   } catch (err) {
@@ -205,7 +208,7 @@ app.post("/api/debts", async (req, res) => {
 });
 
 app.put("/api/debts/:id", async (req, res) => {
-  const { name, balance, interestRate, minimumPayment, notes } = req.body;
+  const { name, balance, interestRate, minimumPayment, notes, owners } = req.body;
   try {
     const result = await pool.query(
       `UPDATE debts SET
@@ -213,14 +216,16 @@ app.put("/api/debts/:id", async (req, res) => {
         balance = COALESCE($2, balance),
         interest_rate = COALESCE($3, interest_rate),
         minimum_payment = COALESCE($4, minimum_payment),
-        notes = COALESCE($5, notes)
-       WHERE id = $6 RETURNING *`,
+        notes = COALESCE($5, notes),
+        owners = COALESCE($6, owners)
+       WHERE id = $7 RETURNING *`,
       [
         name != null ? String(name).trim() : null,
         balance != null ? Number(balance) : null,
         interestRate != null ? Number(interestRate) : null,
         minimumPayment != null ? Number(minimumPayment) : null,
         notes != null ? String(notes).trim() : null,
+        owners != null ? owners : null,
         req.params.id,
       ]
     );
