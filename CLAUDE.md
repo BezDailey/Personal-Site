@@ -43,8 +43,11 @@ Experience entries live as a hardcoded array in `Experience.jsx`; projects live 
 
 **Styling:** CSS Modules (`.module.css`) colocated with each component. No global CSS framework. Note: tag selectors (e.g. `button`, `h1`) in CSS Modules are NOT scoped — only class and ID selectors get hashed. The global `button { all: unset }` rule lives in `Header.module.css` and applies sitewide. A `button:hover { text-decoration: underline }` rule also applies globally — override with `text-decoration: none` on specific hover selectors when unwanted.
 
+**Debt Tracker ownership model:**
+Each debt has an `owners: string[]` field storing `["Jabez"]`, `["August"]`, or `["Jabez", "August"]`. The `DebtTracker` page holds `activeView` state (`"Jabez"` | `"August"` | `"Household"`) and derives `filteredDebts` from it — all downstream components (SummaryBar, debt list, projections, WhatIfCalculator) consume `filteredDebts`, not the full `debts` array. Shared debts appear in both individual views and in Household. The owners are hardcoded to Jabez and August in `DebtForm.jsx` (`OWNERS` constant) — do not make this configurable without revisiting the filtering logic. The `owners` column is a Postgres `TEXT[]`; it is added via `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` in `initDB()`.
+
 **Backend API routes:**
-- `/api/debts` — debt CRUD (no auth required)
+- `/api/debts` — debt CRUD (no auth required); `POST` and `PUT` accept an `owners` array
 - `/api/settings` — payoff strategy settings (no auth required)
 - `/api/login` — returns JWT on valid credentials
 - `/api/pomodoro/sessions` — pomodoro session CRUD (JWT required via `authenticateToken` middleware)

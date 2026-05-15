@@ -106,6 +106,7 @@ cd frontend && npm start  # React dev server
 - **Autopay** — configure a monthly amount and day; payments are auto-logged on page load when due
 - **What If calculator** — slider for extra monthly payment + one-time lump sum with projected payoff date, months saved, and interest saved
 - Summary bar with months-to-freedom countdown, target date, and total eliminated
+- **Ownership & Household view** — each debt is assigned to Jabez, August, or both; a tab switcher filters the full UI (summary, debt list, projections, What-If) by owner; Household shows all debts combined
 
 ---
 
