@@ -39,14 +39,19 @@ const DebtTracker = ({ setActiveSection }) => {
     return map;
   }, [projections]);
 
-  const priorityId = useMemo(() => {
-    const sorted = [...debts].sort((a, b) =>
+  const sortedDebts = useMemo(() =>
+    [...debts].sort((a, b) =>
       settings.strategy === "avalanche"
         ? b.interestRate - a.interestRate
         : a.balance - b.balance
-    );
-    return sorted.find((d) => d.balance > 0)?.id;
-  }, [debts, settings.strategy]);
+    ),
+    [debts, settings.strategy]
+  );
+
+  const priorityId = useMemo(() =>
+    sortedDebts.find((d) => d.balance > 0)?.id,
+    [sortedDebts]
+  );
 
   const handleSaveSettings = async (newSettings) => {
     const updated = await fetch("/api/settings", {
@@ -133,7 +138,7 @@ const DebtTracker = ({ setActiveSection }) => {
       <StrategySettings settings={settings} onSave={handleSaveSettings} />
 
       <div className={styles.debts}>
-        {debts.map((debt) => (
+        {sortedDebts.map((debt) => (
           <DebtCard
             key={debt.id}
             debt={debt}
