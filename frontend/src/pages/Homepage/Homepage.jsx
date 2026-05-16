@@ -8,6 +8,7 @@ import Header from "../../components/Header/Header";
 import Experience from "../../components/Experience/Experience";
 import Projects from "../../components/Projects/Projects";
 import Blog from "../../components/Blog/Blog";
+import Skills from "../../components/Skills/Skills";
 import Footer from "../../components/Footer/Footer";
 import AdminPortal from "../AdminPortal/AdminPortal";
 import DebtTracker from "../DebtTracker/DebtTracker";
@@ -28,6 +29,7 @@ const Homepage = () => {
         <section className={styles.section}>
           {activeSection === "experience" && <Experience />}
           {activeSection === "projects" && <Projects />}
+          {activeSection === "skills" && <Skills />}
           {activeSection === "blog" && <Blog />}
           {activeSection === "admin" && <AdminPortal setActiveSection={setActiveSection} />}
           {activeSection === "debt-tracker" && <DebtTracker setActiveSection={setActiveSection} />}
