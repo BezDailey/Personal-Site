@@ -11,14 +11,14 @@ const Experience = () => {
       title: "Software Engineer",
       employer: "Deloitte",
       location: "Atlanta, GA",
-      description: "Build and ship full-stack features across client and internal products using React and Node.js. Contributed to a firm initiative applying computer vision to autonomous ground vehicle navigation, and conduct AI readiness audits to surface integration opportunities for clients. Design and optimize large-scale ETL pipelines on Databricks with PySpark.",
+      description: "Design and ship ETL pipelines on Databricks and PySpark processing 10,000+ records per batch for CDC's AR Lab Network. Built 30+ React components and data visualizations for a platform serving 100,000+ users. Developed AI tooling for Deloitte's internal Agentic AI Analyst and led the AI Artist newsletter across the AI&D practice.",
       skills: [
         "React",
-        "Node.js",
         "Python",
         "Databricks",
         "PySpark",
-        "Computer Vision",
+        "Node.js",
+        "PostgreSQL",
       ]
     },
     {

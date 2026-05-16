@@ -5,21 +5,15 @@ const MiniEssay = () => {
   return (
     <BlogPost
       header="The Importance of Mini Essays"
-      shortText="Mini-essays are a powerful tool for learning and retaining knowledge. In fact, they provide a structured yet flexible approach to deepen your understanding of various topics."
-      topic="productivity"
+      shortText="There's a difference between being able to follow an explanation and being able to produce one. Mini-essays are how I close that gap when learning technical concepts."
+      topic="learning"
       datePosted="Jan 15 2025"
     >
-      <p>Mini-essays are a powerful tool for learning and retaining knowledge. In fact, they provide a structured yet flexible approach to deepen your understanding of various topics.</p>
-      <p>To begin with, mini-essays are very short essays which you can use to reflect on your topic and practice your writing skills. They take one topic and condense what you have learned into around 100 to 300 words. Although there is no pressure to write more or less, this is a standard foal that I try to stick to when I am exploring a topic.</p>
-      <p>And when writing a mini-essay, this process mirrors a key step in the Feynman technique, which is learning through teaching others. Crafting a mini-essay is a small simulation of the process of teaching others. As a result, this helps deepen your understanding of your topic because once you are able to explain a topic clearly, concisely, and fluidly, you have achieved a deep understanding of it.</p>
-      <p>Ultimately, by embracing mini-essays as a tool for reflection and learning, you not only sharpen your ability to articulate ideas but also solidify your understanding in a way few other methods can achieve.</p>
-      <h2>References</h2>
-      <ul>
-        <li><a href="https://www.youtube.com/watch?v=eCaOSNxwCsw&t=1s">How to Write a Mini-Essay</a></li>
-        <li><a href="https://medium.com/word-garden/mini-essays-dcb33359d37c">Mini Essays</a></li>
-        <li><a href="https://www.colorado.edu/artssciences-advising/resource-library/life-skills/the-feynman-technique-in-academic-coaching?source=post_page-----b2c3805e8219--------------------------------">The Feynman Technique</a></li>
-        <li><a href="https://writingcenter.tamu.edu/faculty-advisors/resources-for-teaching/instruction/mini-essays?source=post_page-----b2c3805e8219--------------------------------">Mini Essays</a></li>
-      </ul>
+      <p>There's a difference between being able to follow an explanation and being able to produce one. I can read about consistent hashing or CAP theorem and nod along just fine. Actually explaining it clearly, from memory, is a different skill. Mini-essays are how I close that gap.</p>
+      <p>The format is simple: one concept, 100 to 300 words, written from memory. No copy-pasting from docs, no paraphrasing the Wikipedia article. Just what I actually understand, in plain language. Where I get stuck or go vague is exactly where my understanding breaks down. That's the point. Writing surfaces gaps that passive reading hides.</p>
+      <p>This matters more than it seems for technical work. Interviews, design reviews, onboarding docs, explaining a system to someone who doesn't code: they all require the same thing. Take something complex and make it legible to another person. An engineer who can explain distributed systems clearly has a real edge over one who can only implement them.</p>
+      <p>The habit I've built: whenever I encounter a new concept, I close the tab and write a mini-essay before moving on. Could be a data engineering pattern, something from a paper, a system design idea I half-understood. If I can't produce 150 coherent words, I didn't actually get it. If I can, I have a reference I wrote myself that I'll actually remember.</p>
+      <p>It's a small constraint. But it adds up.</p>
     </BlogPost>
   );
 };

@@ -18,10 +18,10 @@ const Header = ({ setActiveSection, activeSection }) => {
     <header className={styles.container}>
       <div className={styles.identity}>
         <h1 className={styles.header_title}>Jabez Dailey</h1>
-        <h2 className={styles.header_text}>Software Engineer · Deloitte</h2>
+        <h2 className={styles.header_text}>Software Engineer · Data · AI/ML</h2>
       </div>
       <p className={styles.bio}>
-        Full-stack engineer at Deloitte, building apps, ETL pipelines, and AI tools. CS grad from Morehouse; starting GT OMSCS Fall 2026.
+        Software engineer at Deloitte building full-stack products, data pipelines, and AI tools at scale. Morehouse CS · GT OMSCS incoming Fall 2026.
       </p>
       <div className={styles.links}>
         <button
