@@ -6,11 +6,8 @@
 }
 
 .container {
-  width: 95%;
-  padding-left: 2.5%;
-  padding-right: 2.5%;
-  padding-top: 2rem;
-  padding-bottom: 1rem;
+  width: 100%;
+  padding: 1.5rem 1.25rem 1rem;
   background: var(--beige);
 }
 
@@ -50,7 +47,8 @@
 .links {
   display: flex;
   width: 100%;
-  gap: 10px;
+  gap: 0;
+  justify-content: space-between;
   padding-top: 1rem;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
   margin-bottom: 1rem;
@@ -62,13 +60,12 @@
 
 .navBtn {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 0.6rem;
-  width: 100%;
-  padding: 0.35rem 0;
+  min-height: 44px;
+  padding: 0.5rem 0.25rem;
   color: var(--red);
   cursor: pointer;
-  box-sizing: border-box;
 }
 
 .navBtn:hover {
@@ -84,7 +81,7 @@
 }
 
 .navLabel {
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 0.07em;
@@ -108,7 +105,7 @@
   border: 2px solid var(--red);
   flex-shrink: 0;
   box-sizing: border-box;
-  margin-top: 0.2rem;
+  margin-top: 0.1rem;
 }
 
 .active {
@@ -150,14 +147,13 @@ button:hover {
   cursor: pointer;
 }
 
-/* Single-column layout (below desktop breakpoint) */
+/* Mobile nav: hide sub-labels, use underline active indicator */
 @media only screen and (max-width: 1199px) {
   .navSub {
     display: none;
   }
 
   .links {
-    gap: 1.5rem;
     border-bottom: 2px solid var(--beige);
     border-top: none;
     padding-top: 0;
@@ -165,8 +161,7 @@ button:hover {
   }
 
   .navBtn {
-    width: auto;
-    padding: 0.4rem 0;
+    padding: 0.5rem 0;
     margin-bottom: -2px;
     border-bottom: 2px solid transparent;
   }
@@ -180,12 +175,28 @@ button:hover {
   }
 }
 
-/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 768px) and (max-width: 1199px) {
+  .container {
+    padding: 1.5rem 2rem 1rem;
+  }
+
+  .navLabel {
+    font-size: 1rem;
+  }
+
+  .links {
+    justify-content: flex-start;
+    gap: 2rem;
+  }
+}
+
+/* Desktop sidebar */
 @media only screen and (min-width: 1200px) {
   .container {
     width: 100%;
     height: 100%;
     min-height: 100vh;
+    padding: 2rem 1.5rem 1rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -195,7 +206,37 @@ button:hover {
 
   .links {
     flex-direction: column;
+    justify-content: flex-start;
     gap: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: none;
+    padding-top: 1rem;
+  }
+
+  .navBtn {
+    width: 100%;
+    align-items: flex-start;
+    padding: 0.35rem 0;
+    border-bottom: none;
+    min-height: auto;
+    margin-bottom: 0;
+  }
+
+  .navLabel {
+    font-size: 1rem;
+  }
+
+  .active {
+    border-bottom: none;
+  }
+
+  .dotOutline {
+    display: block;
+    margin-top: 0.2rem;
+  }
+
+  .navSub {
+    display: block;
   }
 
   .icons {

@@ -3,18 +3,15 @@
   flex-direction: column;
 }
 
-.sidebar {
-  /* mobile: matches existing header rendering */
+.section {
+  width: 100%;
+  padding: 1.5rem 1.25rem 2rem;
 }
 
-.section {
-  margin: 0;
-  padding: 0;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  width: 95%;
-  padding-left: 2.5%;
-  padding-right: 2.5%;
+@media (min-width: 768px) {
+  .section {
+    padding: 2rem 2rem 2rem;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -37,10 +34,7 @@
   .section {
     flex: 1;
     width: auto;
-    margin-top: 0;
-    padding-top: 2rem;
-    padding-left: 5%;
-    padding-right: 2%;
+    padding: 2rem 5% 2rem 5%;
     min-height: 100vh;
   }
 }
