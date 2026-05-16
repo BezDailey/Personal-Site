@@ -5,7 +5,7 @@ const SystemDesignFramework = () => {
   return (
     <BlogPost
       header="The System Design Framework I Use in Every Interview"
-      shortText="System design interviews feel open-ended by design — the goal is to see how you think under ambiguity. Having a repeatable framework doesn't limit your thinking. It frees it up."
+      shortText="System design interviews are open-ended by design. They're testing how you think under ambiguity. Having a repeatable framework doesn't limit your thinking. It frees it up."
       topic="system design"
       datePosted="May 16 2026"
     >

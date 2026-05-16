@@ -5,7 +5,7 @@ const ETLLessons = () => {
   return (
     <BlogPost
       header="What Building ETL Pipelines at Scale Actually Taught Me"
-      shortText="Most ETL tutorials teach you to move data from point A to point B. Production pipelines have a different set of problems — and they're more interesting."
+      shortText="Most ETL tutorials teach you to move data from point A to point B. Production pipelines have a different set of problems. They're also more interesting."
       topic="data engineering"
       datePosted="May 16 2026"
     >

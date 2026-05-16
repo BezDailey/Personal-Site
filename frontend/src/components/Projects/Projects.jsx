@@ -35,7 +35,7 @@ const Projects = () => {
     {
       name: "Browser Game with RL Opponent",
       year: "2026",
-      description: "A web-based game built in React where visitors can play against a trained RL agent. The agent is trained using policy gradient methods and served via a lightweight Python API — no installs, just open and play.",
+      description: "A web-based game built in React where visitors can play against a trained RL agent. The agent is trained using policy gradient methods and served via a lightweight Python API. No installs, just open and play.",
       skills: [
         "React",
         "Python",
@@ -46,7 +46,7 @@ const Projects = () => {
     {
       name: "Live Game Leaderboard Pipeline",
       year: "2026",
-      description: "A real-time data pipeline that ingests match events from the Pong game, aggregates them with PySpark Structured Streaming, and feeds a live leaderboard — updated in near real time as games are played.",
+      description: "A real-time data pipeline that ingests match events from the Pong game, aggregates them with PySpark Structured Streaming, and feeds a live leaderboard updated as games are played.",
       skills: [
         "Python",
         "PySpark",
@@ -83,7 +83,7 @@ const Projects = () => {
     {
       name: "Personal Site",
       year: "2023",
-      description: "This site — built from scratch in React with no UI framework. Features a custom design system, a blog with expandable posts, and an admin portal for content management backed by Node.js and PostgreSQL.",
+      description: "This site, built from scratch in React with no UI framework. Features a custom design system, a blog with expandable posts, and an admin portal for content management backed by Node.js and PostgreSQL.",
       skills: [
         "React",
         "Node.js",

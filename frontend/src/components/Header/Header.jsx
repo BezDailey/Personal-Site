@@ -21,7 +21,7 @@ const Header = ({ setActiveSection, activeSection }) => {
         <h2 className={styles.header_text}>Software Engineer · Data · AI/ML</h2>
       </div>
       <p className={styles.bio}>
-        Software engineer at Deloitte building full-stack products, data pipelines, and AI tools at scale. Morehouse CS · GT OMSCS incoming Fall 2026.
+        Software engineer at Deloitte building full-stack products, data pipelines, and AI tools. Morehouse CS · GT OMSCS incoming Fall 2026.
       </p>
       <div className={styles.links}>
         <button

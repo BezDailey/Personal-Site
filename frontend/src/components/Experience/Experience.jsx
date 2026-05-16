@@ -11,7 +11,7 @@ const Experience = () => {
       title: "Software Engineer",
       employer: "Deloitte",
       location: "Atlanta, GA",
-      description: "Design and ship ETL pipelines on Databricks and PySpark processing 10,000+ records per batch for CDC's AR Lab Network. Built 30+ React components and data visualizations for a platform serving 100,000+ users. Developed AI tooling for Deloitte's internal Agentic AI Analyst and led the AI Artist newsletter across the AI&D practice.",
+      description: "Design and ship ETL pipelines on Databricks and PySpark processing 10,000+ records per batch for CDC's AR Lab Network. Also built 30+ React components and data visualizations for a platform serving 100,000+ users, and developed AI tooling for Deloitte's internal Agentic AI Analyst.",
       skills: [
         "React",
         "Python",
@@ -26,7 +26,7 @@ const Experience = () => {
       title: "Software Engineer Intern",
       employer: "McKinsey & Company",
       location: "Atlanta, GA",
-      description: "Built an LLM-powered SQL optimization tool that improved query efficiency by 40%, using OpenAI’s API, a Flask backend, and a React frontend. Delivered the full stack from API integration to UI in a fast-paced consulting environment.",
+      description: "Built an LLM-powered SQL optimization tool that improved query efficiency by 40%, using OpenAI’s API, a Flask backend, and a React frontend. Owned the full stack from API integration to UI.",
       skills: [
         "OpenAI LLMs",
         "Flask",
@@ -68,7 +68,7 @@ const Experience = () => {
       title: "Research Participant",
       employer: "Spelman-Morehouse Directed Reading Program",
       location: "Atlanta, GA",
-      description: "Worked with Dr. Sarah Chehade to explore classical vs. quantum computation, studying qubits, logic gates, and quantum teleportation through the lens of linear algebra and probability. Gained hands-on research experience at the intersection of theoretical CS and emerging quantum technologies.",
+      description: "Worked with Dr. Sarah Chehade to study classical vs. quantum computation: qubits, logic gates, and quantum teleportation, grounded in linear algebra and probability. First research experience in theoretical CS.",
       skills: [
         "Quantum Computing",
         "Linear Algebra",
@@ -110,7 +110,7 @@ const Experience = () => {
       title: "Teacher Assistant",
       employer: "TheClubHou.se",
       location: "Augusta, GA",
-      description: "Mentored 20+ students in web development — JavaScript, HTML/CSS, Node.js, and MySQL — with a focus on debugging and hands-on problem solving. Helped cut mock interview assessment time by 30% and built a web app to track student attendance.",
+      description: "Mentored 20+ students in web development (JavaScript, HTML/CSS, Node.js, and MySQL) with a focus on debugging and hands-on problem solving. Helped cut mock interview assessment time by 30% and built a web app to track student attendance.",
       skills: [
         "JavaScript",
         "HTML",
