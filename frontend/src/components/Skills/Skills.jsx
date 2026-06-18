@@ -2,12 +2,14 @@ import React from "react";
 import Skill from "../Skill/Skill";
 import styles from "./Skills.module.css";
 
+// Re-add Kafka, Airflow, PyTorch once shipped in a real project
 const skillGroups = [
-  { label: "Languages", skills: ["Python", "JavaScript", "SQL", "TypeScript"] },
-  { label: "Data Engineering", skills: ["PySpark", "dbt", "Airflow", "Kafka", "PostgreSQL", "Docker"] },
-  { label: "AI/ML", skills: ["PyTorch", "RAG", "ChromaDB", "OpenAI API"] },
-  { label: "Frontend", skills: ["React", "Node.js", "HTML", "CSS"] },
-  { label: "Cloud & Tools", skills: ["Databricks", "AWS", "Git"] },
+  { label: "Languages", skills: ["Python", "JavaScript", "TypeScript", "SQL", "Java"] },
+  { label: "Backend", skills: ["Node.js", "Express", "Flask", "REST APIs", "PostgreSQL"] },
+  { label: "Frontend", skills: ["React", "HTML", "CSS"] },
+  { label: "Data Engineering", skills: ["PySpark", "Databricks", "dbt", "PostgreSQL"] },
+  { label: "AI/ML", skills: ["RAG", "ChromaDB", "OpenAI API"] },
+  { label: "Cloud & Tools", skills: ["Docker", "Git", "CI/CD", "Azure"] },
 ];
 
 const Skills = () => {
