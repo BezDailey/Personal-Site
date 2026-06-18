@@ -7,65 +7,17 @@ import Project from "../../components/Project/Project";
 const Projects = () => {
   const projects = [
     {
-      name: "End-to-End Data Pipeline",
-      year: "2026",
-      description: "A standalone public data pipeline built on open-source tooling. Ingests a real-world dataset, transforms it with dbt, orchestrates daily runs with Airflow, and exposes a live dashboard. One-command setup with Docker Compose.",
+      name: "Personal Site",
+      year: "2023",
+      description: "This site, built from scratch in React with no UI framework. Features a custom design system, a blog with expandable posts, and an admin portal for content management backed by Node.js and PostgreSQL.",
       skills: [
-        "Python",
-        "dbt",
-        "Airflow",
+        "React",
+        "Node.js",
         "PostgreSQL",
-        "Docker",
+        "CSS",
       ],
-      comingSoon: true,
-    },
-    {
-      name: "AI Study Assistant",
-      year: "2026",
-      description: "A RAG-powered study assistant that answers questions over a personal knowledge base. Built with a FastAPI backend, ChromaDB vector store, and a React frontend. Includes an evaluation pipeline to measure retrieval and answer quality.",
-      skills: [
-        "Python",
-        "FastAPI",
-        "React",
-        "RAG",
-        "ChromaDB",
-      ],
-      comingSoon: true,
-    },
-    {
-      name: "Browser Game with RL Opponent",
-      year: "2026",
-      description: "A web-based game built in React where visitors can play against a trained RL agent. The agent is trained using policy gradient methods and served via a lightweight Python API. No installs, just open and play.",
-      skills: [
-        "React",
-        "Python",
-        "PyTorch",
-      ],
-      comingSoon: true,
-    },
-    {
-      name: "Live Game Leaderboard Pipeline",
-      year: "2026",
-      description: "A real-time data pipeline that ingests match events from the Pong game, aggregates them with PySpark Structured Streaming, and feeds a live leaderboard updated as games are played.",
-      skills: [
-        "Python",
-        "PySpark",
-        "Kafka",
-        "Docker",
-      ],
-      comingSoon: true,
-    },
-    {
-      name: "Gesture-Controlled Game Input",
-      year: "2026",
-      description: "Webcam-based gesture detection that maps hand movements to game controls. MediaPipe detects hand landmarks in the browser in real time; a trained classifier maps landmark positions to paddle actions.",
-      skills: [
-        "React",
-        "Python",
-        "MediaPipe",
-        "ONNX",
-      ],
-      comingSoon: true,
+      github: "https://github.com/BezDailey/Personal-Site",
+      website: "https://www.jabezdailey.com",
     },
     {
       name: "Kingdom Call Global",
@@ -81,23 +33,37 @@ const Projects = () => {
       website: "https://www.kingdomcallglobal.com",
     },
     {
-      name: "Personal Site",
-      year: "2023",
-      description: "This site, built from scratch in React with no UI framework. Features a custom design system, a blog with expandable posts, and an admin portal for content management backed by Node.js and PostgreSQL.",
+      name: "Second Brain",
+      year: "2026",
+      description: "A RAG-powered study assistant that answers questions over a personal knowledge base. Built with a FastAPI backend, ChromaDB vector store, and a React frontend. Includes an evaluation pipeline to measure retrieval and answer quality.",
       skills: [
+        "Python",
+        "FastAPI",
         "React",
-        "Node.js",
-        "PostgreSQL",
-        "CSS",
+        "RAG",
+        "ChromaDB",
       ],
-      github: "https://github.com/BezDailey/Personal-Site",
+      comingSoon: true,
+      // TODO: add github and website URLs when available
+    },
+    {
+      name: "End-to-End Data Pipeline",
+      year: "2026",
+      description: "A standalone public data pipeline built on open-source tooling. Ingests a real-world dataset, transforms it with dbt, orchestrates daily runs with Airflow, and exposes a live dashboard. One-command setup with Docker Compose.",
+      skills: [
+        "Python",
+        "dbt",
+        "Airflow",
+        "PostgreSQL",
+        "Docker",
+      ],
+      comingSoon: true,
+      // TODO: add github and website URLs when available
     },
   ];
   return (
     <div className={styles.projects}>
-      {projects
-        .sort((a, b) => b.year - a.year)
-        .map((project) => (
+      {projects.map((project) => (
           <Project
             name={project.name}
             year={project.year}

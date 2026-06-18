@@ -15,9 +15,10 @@ const Project = ({ name, year, description, skills, github, website, comingSoon 
             <Skill name={skill} key={index} />
           ))}
         </div>
-        {comingSoon ? (
+        {comingSoon && (
           <span className={styles.comingSoonBadge}>In Progress</span>
-        ) : (
+        )}
+        {(website || github) && (
           <div className={styles.links}>
             {website && (
               <a href={website} target="_blank" rel="noopener noreferrer" aria-label="Live site">
