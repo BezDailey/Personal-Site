@@ -7,35 +7,9 @@ import Project from "../../components/Project/Project";
 const Projects = () => {
   const projects = [
     {
-      name: "Personal Site",
-      year: "2023",
-      description: "This site, built from scratch in React with no UI framework. Features a custom design system, a blog with expandable posts, and an admin portal for content management backed by Node.js and PostgreSQL.",
-      skills: [
-        "React",
-        "Node.js",
-        "PostgreSQL",
-        "CSS",
-      ],
-      github: "https://github.com/BezDailey/Personal-Site",
-      website: "https://www.jabezdailey.com",
-    },
-    {
-      name: "Kingdom Call Global",
-      year: "2025",
-      description: "Production website for a Tampa-area ministry organization. Built with React 19 and Vite, featuring a custom design system (token-based CSS), React Router for multi-page navigation, and a photo gallery with keyboard navigation.",
-      skills: [
-        "React",
-        "Javascript",
-        "Tailwind CSS",
-        "React Router",
-      ],
-      github: "https://github.com/BezDailey/kingdom-call-global",
-      website: "https://www.kingdomcallglobal.com",
-    },
-    {
       name: "Second Brain",
       year: "2026",
-      description: "A RAG-powered study assistant that answers questions over a personal knowledge base. Built with a FastAPI backend, ChromaDB vector store, and a React frontend. Includes an evaluation pipeline to measure retrieval and answer quality.",
+      description: "RAG-powered study assistant that answers questions over a personal knowledge base. FastAPI backend with ChromaDB for vector search, React frontend, and an evaluation pipeline that measures retrieval precision and answer quality.",
       skills: [
         "Python",
         "FastAPI",
@@ -49,7 +23,7 @@ const Projects = () => {
     {
       name: "End-to-End Data Pipeline",
       year: "2026",
-      description: "A standalone public data pipeline built on open-source tooling. Ingests a real-world dataset, transforms it with dbt, orchestrates daily runs with Airflow, and exposes a live dashboard. One-command setup with Docker Compose.",
+      description: "Standalone data pipeline ingesting a real-world dataset, transforming it with dbt, orchestrating daily runs with Airflow, and exposing a live dashboard. Fully containerized with Docker Compose for one-command setup.",
       skills: [
         "Python",
         "dbt",
@@ -59,6 +33,32 @@ const Projects = () => {
       ],
       comingSoon: true,
       // TODO: add github and website URLs when available
+    },
+    {
+      name: "Kingdom Call Global",
+      year: "2025",
+      description: "Production website for a ministry organization. Built with React 19 and Vite, featuring a token-based design system, React Router for multi-page navigation, and a photo gallery with keyboard navigation.",
+      skills: [
+        "React",
+        "JavaScript",
+        "Tailwind CSS",
+        "Vite",
+      ],
+      github: "https://github.com/BezDailey/kingdom-call-global",
+      website: "https://www.kingdomcallglobal.com",
+    },
+    {
+      name: "Personal Site",
+      year: "2023",
+      description: "Full-stack portfolio site built from scratch — custom design system with no UI framework, an admin portal with JWT authentication, and a Node.js/PostgreSQL backend for content management.",
+      skills: [
+        "React",
+        "Node.js",
+        "PostgreSQL",
+        "JWT Auth",
+      ],
+      github: "https://github.com/BezDailey/Personal-Site",
+      website: "https://www.jabezdailey.com",
     },
   ];
   return (
