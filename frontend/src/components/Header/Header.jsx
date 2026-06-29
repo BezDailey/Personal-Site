@@ -59,18 +59,6 @@ const Header = ({ setActiveSection, activeSection }) => {
             <span className={styles.navSub}>Tech stack</span>
           </span>
         </button>
-        <button
-          onClick={handleButtonClick}
-          value="blog"
-          type="button"
-          className={`${styles.navBtn} ${getButtonClass("blog")}`}
-        >
-          <span className={styles.dotOutline} />
-          <span className={styles.navContent}>
-            <span className={styles.navLabel}>Blog</span>
-            <span className={styles.navSub}>Writing</span>
-          </span>
-        </button>
       </div>
       <div className={styles.icons}>
         <a

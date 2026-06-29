@@ -30,7 +30,6 @@ const Homepage = () => {
           {activeSection === "experience" && <Experience />}
           {activeSection === "projects" && <Projects />}
           {activeSection === "skills" && <Skills />}
-          {activeSection === "blog" && <Blog />}
           {activeSection === "admin" && <AdminPortal setActiveSection={setActiveSection} />}
           {activeSection === "debt-tracker" && <DebtTracker setActiveSection={setActiveSection} />}
           {activeSection === "pomodoro" && <Pomodoro setActiveSection={setActiveSection} />}
