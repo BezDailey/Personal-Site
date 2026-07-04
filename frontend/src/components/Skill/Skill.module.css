@@ -1,21 +1,17 @@
 .skill {
   margin: 0;
   padding: 0;
-  background: var(--beige);
-  display: flex;
-  border-radius: 50px;
-  flex-direction: row;
-  flex-wrap: nowrap;
+  background: var(--mist);
+  display: inline-flex;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 .text {
-  font-size: 0.8em;
-  font-weight: bold;
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 20px;
-  margin-right: 20px;
-  padding: 0;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.3rem 0.75rem;
   text-align: center;
-  color: var(--maroon);
+  color: var(--ink);
 }

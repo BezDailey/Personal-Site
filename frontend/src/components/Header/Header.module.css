@@ -1,46 +1,44 @@
-:root {
-  --maroon: #7d0a0a;
-  --red: #bf3131;
-  --beige: #ead196;
-  --yellow: #f3edc8;
-}
-
 .container {
   width: 100%;
   padding: 1.5rem 1.25rem 1rem;
-  background: var(--beige);
+  background: var(--slate);
 }
 
-/* Identity block: name + title grouped tightly */
+/* Identity block */
 .identity {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.3rem;
   margin-bottom: 0.75rem;
 }
 
 .header_title {
   margin: 0;
   padding: 0;
-  color: var(--maroon);
+  color: #fff;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 1.75rem;
+  font-weight: 700;
   line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
 .header_text {
-  color: var(--red);
+  color: var(--signal);
   margin: 0;
   padding: 0;
-  font-size: 1rem;
-  font-weight: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.03em;
 }
 
 /* Bio */
 .bio {
   margin: 0 0 1.25rem;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   line-height: 1.6;
-  color: #5a3a3a;
+  color: rgba(255, 255, 255, 0.65);
 }
 
 /* Nav */
@@ -50,7 +48,7 @@
   gap: 0;
   justify-content: space-between;
   padding-top: 1rem;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   margin-bottom: 1rem;
 }
 
@@ -64,13 +62,14 @@
   gap: 0.6rem;
   min-height: 44px;
   padding: 0.5rem 0.25rem;
-  color: var(--red);
+  color: rgba(255, 255, 255, 0.55);
   cursor: pointer;
+  transition: color 0.15s ease;
 }
 
 .navBtn:hover {
   text-decoration: none;
-  color: var(--maroon);
+  color: #fff;
   cursor: pointer;
 }
 
@@ -81,41 +80,43 @@
 }
 
 .navLabel {
-  font-size: 0.9rem;
-  font-weight: bold;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.07em;
+  letter-spacing: 0.1em;
   line-height: 1.2;
 }
 
 .navSub {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   font-weight: normal;
-  color: #9a6a6a;
+  color: rgba(255, 255, 255, 0.35);
   text-transform: none;
   letter-spacing: 0;
   line-height: 1.2;
 }
 
 .dotOutline {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: transparent;
-  border: 2px solid var(--red);
+  border: 2px solid rgba(255, 255, 255, 0.3);
   flex-shrink: 0;
   box-sizing: border-box;
   margin-top: 0.1rem;
+  transition: all 0.15s ease;
 }
 
 .active {
-  color: var(--maroon);
+  color: #fff;
   font-weight: bold;
 }
 
 .active .dotOutline {
-  background: var(--maroon);
-  border-color: var(--maroon);
+  background: var(--signal);
+  border-color: var(--signal);
 }
 
 /* Icons */
@@ -126,20 +127,21 @@
 }
 
 .icon {
-  width: 1.5rem;
-  filter: brightness(0%);
-  opacity: 0.7;
+  width: 1.4rem;
+  filter: brightness(0) invert(1);
+  opacity: 0.45;
   transition: opacity 0.15s ease;
 }
 
 .icon:hover {
-  opacity: 1;
+  opacity: 0.9;
 }
 
+/* Global button reset */
 button {
   all: unset;
   font-size: 1.3rem;
-  color: var(--red);
+  color: var(--signal);
 }
 
 button:hover {
@@ -147,14 +149,14 @@ button:hover {
   cursor: pointer;
 }
 
-/* Mobile nav: hide sub-labels, use underline active indicator */
+/* Mobile nav */
 @media only screen and (max-width: 1199px) {
   .navSub {
     display: none;
   }
 
   .links {
-    border-bottom: 2px solid var(--beige);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
     border-top: none;
     padding-top: 0;
     margin-bottom: 1rem;
@@ -167,7 +169,7 @@ button:hover {
   }
 
   .active {
-    border-bottom: 2px solid var(--maroon);
+    border-bottom: 2px solid var(--signal);
   }
 
   .dotOutline {
@@ -181,7 +183,7 @@ button:hover {
   }
 
   .navLabel {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .links {
@@ -196,7 +198,7 @@ button:hover {
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    padding: 2rem 1.5rem 1rem;
+    padding: 2.5rem 2rem 1rem;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -204,11 +206,28 @@ button:hover {
     background: transparent;
   }
 
+  .identity {
+    margin-bottom: 1rem;
+  }
+
+  .header_title {
+    font-size: 2rem;
+    color: var(--ink);
+  }
+
+  .header_text {
+    color: var(--signal);
+  }
+
+  .bio {
+    color: var(--graphite);
+  }
+
   .links {
     flex-direction: column;
     justify-content: flex-start;
     gap: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
     border-bottom: none;
     padding-top: 1rem;
   }
@@ -216,32 +235,55 @@ button:hover {
   .navBtn {
     width: 100%;
     align-items: flex-start;
-    padding: 0.35rem 0;
+    padding: 0.4rem 0;
     border-bottom: none;
     min-height: auto;
     margin-bottom: 0;
+    color: var(--graphite);
   }
 
-  .navLabel {
-    font-size: 1rem;
+  .navBtn:hover {
+    color: var(--ink);
   }
 
   .active {
+    color: var(--ink);
     border-bottom: none;
-  }
-
-  .dotOutline {
-    display: block;
-    margin-top: 0.2rem;
   }
 
   .navSub {
     display: block;
+    color: var(--graphite);
+    opacity: 0.7;
+  }
+
+  .dotOutline {
+    display: block;
+    margin-top: 0.25rem;
+    border-color: var(--graphite);
+  }
+
+  .navBtn:hover .dotOutline {
+    border-color: var(--ink);
+  }
+
+  .active .dotOutline {
+    background: var(--signal);
+    border-color: var(--signal);
   }
 
   .icons {
     margin-top: auto;
     padding-bottom: 1rem;
+  }
+
+  .icon {
+    filter: brightness(0%);
+    opacity: 0.5;
+  }
+
+  .icon:hover {
+    opacity: 1;
   }
 
   .adminLink {
@@ -257,7 +299,7 @@ button:hover {
   }
 
   .adminLink:hover {
-    color: var(--maroon);
+    color: var(--ink);
     text-decoration: none;
   }
 }

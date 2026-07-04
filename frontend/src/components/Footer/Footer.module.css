@@ -1,5 +1,5 @@
 .container {
-  background: var(--beige);
+  background: var(--slate);
   width: 100%;
   padding: 1rem 1.25rem;
   display: flex;
@@ -28,8 +28,14 @@
 }
 
 .icon {
-  width: 1.5rem;
-  filter: brightness(0%);
+  width: 1.4rem;
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.icon:hover {
+  opacity: 0.9;
 }
 
 .right {
@@ -41,14 +47,15 @@
 
 .credit {
   margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
   font-size: 0.85rem;
-  font-weight: bold;
-  color: var(--maroon);
+  font-weight: 600;
+  color: #fff;
 }
 
 .portalLink {
   font-size: 0.75rem;
-  color: #aaa;
+  color: rgba(255, 255, 255, 0.4);
   background: none;
   border: none;
   cursor: pointer;
@@ -57,6 +64,6 @@
 }
 
 .portalLink:hover {
-  color: var(--maroon);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
 }

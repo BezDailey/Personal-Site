@@ -2,21 +2,22 @@ import React from "react";
 
 import styles from "./Job.module.css";
 
-import Skill from "../Skill/Skill";
 const Job = ({date, title, employer, location, description, skills}) => {
   return (
     <div className={styles.container}>
-      <h3 className={styles.date}>{date}</h3>
-      <h2 className={styles.title}>{title}</h2>
-      <h2 className={styles.employer}>
-        {employer} &#x2022; {location}
-      </h2>
-      <p className={styles.description}>{description}</p>
-      <div className={styles.skills}>
-        {skills.map((name, index) => (
-          <Skill name={name} key={index} />
-        ))}
+      <div className={styles.header}>
+        <div>
+          <h2 className={styles.title}>{title}</h2>
+          <h3 className={styles.employer}>
+            {employer} · {location}
+          </h3>
+        </div>
+        <span className={styles.date}>{date}</span>
       </div>
+      <p className={styles.description}>{description}</p>
+      <p className={styles.skills}>
+        ▸ {skills.join(" · ")}
+      </p>
     </div>
   );
 };

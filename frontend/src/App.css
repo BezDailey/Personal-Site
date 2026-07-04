@@ -1,9 +1,17 @@
 :root {
-  --maroon: #7d0a0a;
-  --red: #bf3131;
-  --beige: #ead196;
-  --yellow: #f3edc8;
-  --yellow-background: hsl(52, 64%, 92.5%);
+  --ink: #1a1a2e;
+  --slate: #16213e;
+  --stone: #e8e4dd;
+  --signal: #e94560;
+  --mist: #f5f3ef;
+  --graphite: #6b6b7b;
+
+  /* Legacy aliases for admin pages that still reference old vars */
+  --maroon: var(--ink);
+  --red: var(--signal);
+  --beige: var(--stone);
+  --yellow: var(--mist);
+  --yellow-background: var(--stone);
 }
 
 *, *::before, *::after {
@@ -12,7 +20,7 @@
 
 html {
   width: 100%;
-  background: var(--yellow-background);
+  background: var(--stone);
   margin: 0;
   padding: 0;
   min-height: 100vh;
