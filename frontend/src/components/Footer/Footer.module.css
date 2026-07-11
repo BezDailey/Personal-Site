@@ -53,17 +53,3 @@
   color: #fff;
 }
 
-.portalLink {
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.4);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  letter-spacing: 0.04em;
-}
-
-.portalLink:hover {
-  color: rgba(255, 255, 255, 0.8);
-  text-decoration: none;
-}

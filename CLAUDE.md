@@ -21,35 +21,36 @@ This is a single-page React app (Create React App) with no routing — navigatio
 
 **Section switching flow:**
 - `App.js` renders `Homepage`
-- `Homepage` holds `activeSection` state and passes `setActiveSection` to `Header`
-- `Header` renders nav buttons that call `setActiveSection` via `event.currentTarget.value` (not `event.target.value` — buttons have inner spans so target may be a child element)
-- `Homepage` conditionally renders sections based on `activeSection`: `"experience"`, `"projects"`, `"blog"`
+- `Homepage` holds `activeSection` state; sections are `"experience"`, `"projects"`, `"skills"` (Blog exists as components but is not currently in the nav — see roadmap #5)
+- Nav buttons live in the shared `Nav` component (`src/components/Nav/Nav.jsx`), rendered twice: once inside `Header` with `variant="sidebar"` (desktop only) and once directly in `Homepage` with `variant="bar"` (sticky mobile tab bar, hidden ≥1200px). The mobile bar must stay a direct child of `.layout` — `position: sticky` is bounded by the parent element, so it would not stick if nested inside the header
+- Nav buttons call `setActiveSection` via `event.currentTarget.value` (not `event.target.value` — buttons have inner spans so target may be a child element)
+- Section content is wrapped in a `div` keyed by `activeSection` with a `.fade` class (`Homepage.module.css`) — remounting triggers a 0.2s fade/slide-in animation on every switch (disabled under `prefers-reduced-motion`)
 
 **Two-column layout (desktop ≥1200px):**
 - `Homepage` renders a `.layout` flex row containing `.sidebar` and `.section`
 - `.sidebar` is `position: sticky; height: 100vh` — holds the `Header` component
 - `.section` is the scrollable content area on the right
-- Below 1200px, layout collapses to single-column stacked
+- Below 1200px, layout collapses to single-column stacked: dark header block, then sticky tab bar, then content, then `Footer` (footer is mobile-only; desktop shows icons/links in the sidebar instead)
 
 **Blog post pattern:**
 Each blog post is a standalone component in `src/components/BlogPosts/<PostName>/`. New posts should use the shared `BlogPost` wrapper component (`src/components/BlogPosts/BlogPost/BlogPost.jsx`), which accepts `header`, `shortText`, `datePosted`, `topic` props and renders children as the expanded content. After creating a new post component, add it to `src/components/Blog/Blog.jsx` (newest first).
 
 **Data as JSX props (not a CMS):**
-Experience entries live as a hardcoded array in `Experience.jsx`; projects live in `Projects.jsx`. To add/update content, edit those arrays directly.
+Experience entries live as a hardcoded array in `Experience.jsx`; projects live in `Projects.jsx`; skill groups live in `Skills.jsx`. To add/update content, edit those arrays directly.
 
-**Styling:** CSS Modules (`.module.css`) colocated with each component. No global CSS framework. Note: tag selectors (e.g. `button`, `h1`) in CSS Modules are NOT scoped — only class and ID selectors get hashed. The global `button { all: unset }` rule lives in `Header.module.css` and applies sitewide. A `button:hover { text-decoration: underline }` rule also applies globally — override with `text-decoration: none` on specific hover selectors when unwanted.
+**Styling:** CSS Modules (`.module.css`) colocated with each component. No global CSS framework. Note: tag selectors (e.g. `button`, `h1`) in CSS Modules are NOT scoped — only class and ID selectors get hashed. The global `button { all: unset }` reset and the global `button:focus-visible` / `a:focus-visible` outline styles live in `Header.module.css` and apply sitewide. A `button:hover { text-decoration: underline }` rule also applies globally — override with `text-decoration: none` on specific hover selectors when unwanted.
 
 **Backend:**
-The Express server (`server.js`) serves the static frontend build. Admin features (login, debt tracker, pomodoro) are being removed — see GitHub project board for tracking.
+The Express server (`server.js`) serves the static frontend build. Admin features (login, debt tracker, pomodoro) are being removed — all UI entry points (the "⌘ Portal" buttons) are gone and `Homepage` no longer renders those sections; the page components still exist on disk pending full removal (see GitHub project board).
 
 **Planned features (GitHub project board):**
 - Re-enable Blog section in navigation (#5)
 - Migrate from Create React App to Vite (#6)
-- Add downloadable resume/PDF link (#7)
+- Add downloadable resume/PDF link (#7) — the sidebar "↓ Resume" link points to `/resume.pdf`; the PDF still needs to be added to `frontend/public/`
 - Add dark mode support (#8)
 - Add SEO meta tags and Open Graph support (#9)
-- Add contact form or email link (#10)
-- Add page transition animations (#11)
+- Add contact form or email link (#10) — done (mailto link in Header)
+- Add page transition animations (#11) — done (section fade-in)
 - Filter projects and experience by technology (#12)
 
 ---
@@ -58,76 +59,83 @@ The Express server (`server.js`) serves the static frontend build. Admin feature
 
 ### Color Palette
 
-CSS variables are defined in `App.css` and re-declared in `Header.module.css`:
+CSS variables are defined in `App.css`:
 
-| Variable              | Value                    | Usage                                                  |
-|-----------------------|--------------------------|--------------------------------------------------------|
-| `--maroon`            | `#7d0a0a`                | Primary headings, active nav, bold accents             |
-| `--red`               | `#bf3131`                | Secondary headings, nav labels, dates, card hover      |
-| `--beige`             | `#ead196`                | Sidebar background, skill pill background, card border |
-| `--yellow`            | `#f3edc8`                | Card backgrounds (blog, project, experience)           |
-| `--yellow-background` | `hsl(52, 64%, 92.5%)`    | Page background (`html`)                               |
+| Variable     | Value     | Usage                                                       |
+|--------------|-----------|-------------------------------------------------------------|
+| `--ink`      | `#1a1a2e` | Primary text, headings, desktop nav active state            |
+| `--slate`    | `#16213e` | Dark header/footer background (mobile), mobile tab bar      |
+| `--stone`    | `#e8e4dd` | Page background (`html`)                                    |
+| `--signal`   | `#e94560` | Accent: subtitles, active nav dot/underline, hovers, focus  |
+| `--mist`     | `#f5f3ef` | Card and skill-pill backgrounds                             |
+| `--graphite` | `#6b6b7b` | Muted text: dates, skills lines, desktop nav resting state  |
+
+Legacy aliases (`--maroon`, `--red`, `--beige`, `--yellow`, `--yellow-background`) map onto the new palette for old admin pages — do not use them in new code.
 
 ### Typography
 
-- **Font stack:** System sans-serif (`-apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', ...`), set globally in `index.css`. No external fonts.
-- **Code font:** `'Courier New', Courier, monospace` — used for inline code, dates, and any monospaced metadata
-- **Heading colors:** `h1` → `--maroon`, `h2` → `--red`
-- **Name (sidebar h1):** `1.75rem`, `--maroon`
-- **Job title:** `1rem`, `--red`, `font-weight: normal`
-- **Bio text:** `0.875rem`, `line-height: 1.6`, `#5a3a3a` (muted warm tone)
-- **Dates (Job, Blog):** `0.75–0.85rem`, bold, monospace, `--maroon` or `--red`
-- **Meta labels (topic, field labels):** `0.72–0.75rem`, bold, uppercase, `letter-spacing: 0.06–0.1em`, `--red`
-- **Body text:** default size and color
+Google Fonts loaded in `public/index.html`:
+- **Inter** — body text (set on `body` in `index.css`)
+- **Space Grotesk** — display: name, section headings, entry/card titles, nav labels
+- **JetBrains Mono** — metadata: job-title line, dates, skills lines, pills, group labels, contact links
 
-### Card Pattern
+Conventions:
+- **Name (header h1):** Space Grotesk, `1.75rem` mobile / `2rem` desktop, `#fff` on mobile, `--ink` on desktop
+- **Title line (header h2):** JetBrains Mono, `0.8rem`, `--signal`
+- **Bio:** `0.85rem`, `line-height: 1.6`, translucent white on mobile / `--graphite` on desktop
+- **Entry titles (Job/Project):** Space Grotesk, `1.1–1.15rem`, weight 600, `--ink`
+- **Employer/location line:** `0.85rem`, `--signal`
+- **Dates:** JetBrains Mono, `0.72rem`, `--graphite`
+- **Skills line (under entries):** JetBrains Mono, `0.72rem`, `--graphite`, prefixed with `▸`
+- **Group labels (Skills section):** JetBrains Mono, `0.7rem`, uppercase, `letter-spacing: 0.1em`, `--graphite`
 
-Used by Blog posts, Projects, and Experience entries:
-- Background: `var(--yellow)`
-- Left border: `3px solid var(--beige)` at rest
-- Hover: `border-left-color` transitions to `var(--red)` (`transition: border-color 0.15s ease`)
-- No `box-shadow`, no `transform` on hover
-- Padding: `1.25rem 1.5rem`
+### Entry Pattern (Experience)
 
-### Buttons
+Job entries (`Job.module.css`) are flat rows separated by hairlines, not cards:
+- `padding: 1.5rem 1rem` with negative left/right margins so text stays aligned with the column edge
+- `border-bottom: 1px solid rgba(0,0,0,0.08)` between entries (none on last)
+- Transparent `border-left: 2px` at rest; on hover the border turns `--signal` and background tints `rgba(233,69,96,0.04)` (0.2s ease)
 
-Global reset in `Header.module.css`: `button { all: unset; font-size: 1.3rem; color: var(--red); }` — applies to all buttons sitewide.
+### Card Pattern (Projects)
 
-Named button variants:
-- **Nav button** (`.navBtn`): flex row with outlined dot + label + subtitle. `text-decoration: none` on hover, color shifts to `--maroon`. Uses `event.currentTarget.value` for click handling.
-- **Text CTA** (blog "Read →"): `all: unset`, `font-size: 0.8rem`, bold, `--red`. No underline on hover.
-- **Discrete link**: `font-size: 0.75rem`, `color: #aaa`, hover shifts to `--maroon` or `--red`.
+Project cards (`Project.module.css`):
+- Background `--mist`, `border-radius: 4px`, `border: 1px solid rgba(0,0,0,0.06)`, `padding: 1.5rem`
+- Hover: `box-shadow: 0 4px 20px rgba(233,69,96,0.1)` + `translateY(-1px)`
+- "Building" badge: JetBrains Mono, uppercase, `--signal` on `rgba(233,69,96,0.08)`
+
+### Buttons & Links
+
+Global reset in `Header.module.css`: `button { all: unset; font-size: 1.3rem; color: var(--signal); }` — applies sitewide. Because `all: unset` strips focus outlines, `Header.module.css` also defines global `button:focus-visible, a:focus-visible { outline: 2px solid var(--signal) }` — keep this when adding interactive elements.
+
+- **Nav button** (`Nav.module.css` `.navBtn`): dot + uppercase Space Grotesk label + subtitle. See Navigation below.
+- **Contact/resume links** (`Header.module.css` `.action`): JetBrains Mono `0.75rem`, translucent white (mobile) / `--graphite` (desktop), hover `--signal`. Resume points to `/resume.pdf`.
 
 ### Navigation
 
-**Desktop sidebar (≥1200px):**
-- Vertical flex column, `gap: 0`
-- Each item: outlined circle dot (`9px`, `border: 2px solid var(--red)`) + `.navContent` (label + subtitle)
-- Active: dot fills `--maroon`, label color `--maroon`, `font-weight: bold`
-- Label: `1rem`, bold, uppercase, `letter-spacing: 0.07em`
-- Subtitle: `0.78rem`, `#9a6a6a`, normal weight — hidden on mobile
+Both variants live in `Nav.module.css`; buttons share `.navBtn` / `.active` / `.dotOutline` / `.navLabel` / `.navSub` classes.
 
-**Mobile single-column (≤1199px):**
-- Horizontal flex row, `gap: 1.5rem`
-- Dots hidden; tab-style underline instead
-- Active item: `border-bottom: 2px solid var(--maroon)`, overlapping a `border-bottom: 2px solid var(--beige)` on the row
+**Desktop sidebar (`variant="sidebar"`, shown ≥1200px):**
+- Vertical flex column under a `border-top` hairline
+- Each item: outlined dot (`8px`, border `--graphite`) + label + subtitle
+- Resting color `--graphite`; active/hover `--ink`; active dot fills `--signal`
+- Label: Space Grotesk `0.85rem`, weight 600, uppercase, `letter-spacing: 0.1em`
 
-### Experience Timeline
-
-- `.experiences` has `border-left: 2px solid var(--beige)` and `padding-left: 1.5rem`
-- Each `Job` wrapper `div::before`: `10px` circle, `background: var(--maroon)`, `position: absolute`, aligned to the left border
+**Mobile tab bar (`variant="bar"`, hidden ≥1200px):**
+- Rendered by `Homepage` between the header and content; `position: sticky; top: 0; z-index: 10` with `--slate` background so it stays pinned while scrolling
+- Horizontal row, left-aligned, `gap: 1.5rem` (`2rem` ≥768px) — tabs are grouped, not spread with `space-between`
+- Dots and subtitles hidden; active tab gets a `border-bottom: 2px solid var(--signal)` underline overlapping the bar's translucent white bottom border
 
 ### Skill Pills
 
-Rendered by `Skill.jsx`. Pill shape via `border-radius: 50px`, background `--beige`, text `0.8em` bold `--maroon`, horizontal padding `20px`. Used in Experience and Projects footers.
+Rendered by `Skill.jsx`: background `--mist`, `border-radius: 4px`, `1px` translucent border, JetBrains Mono `0.75rem` `--ink`, padding `0.3rem 0.75rem`. Used in the Skills section groups.
 
 ### Layout
 
-- **Page max-width:** At `≥1200px`, body is `65%` width centered (`margin-left: 15%`). Below that, `95%` width with `2.5%` margins.
-- **Desktop two-column:** `.sidebar` is `38%` wide (sticky, `height: 100vh`), `.section` is `flex: 1` with `padding-left: 5%`
-- **Lists (Blog, Projects):** `flex-direction: column; gap: 1.5rem`
-- **Experience:** `flex-direction: column; gap: 2.5em` with timeline border
-- **Skill tag rows:** `flex-direction: row; flex-wrap: wrap; gap: 10px`
+- **Page max-width:** At `≥1200px`, `body` is capped at `max-width: 1100px` and centered (`margin: 0 auto`) with `2.5%` side padding. Below that, full width.
+- **Desktop two-column:** `.sidebar` is `38%` wide (sticky, `height: 100vh`), `.section` is `flex: 1` with `padding: 2.5rem 5%`
+- **Section transitions:** `.fade` in `Homepage.module.css` — `fadeIn` keyframes (opacity + 6px translateY, 0.2s), disabled under `prefers-reduced-motion`
+- **Lists:** Projects `gap: 1rem`; Experience entries `gap: 0` (hairline-separated); Skills groups `gap: 1.25rem`
+- **Skill pill rows:** `flex-direction: row; flex-wrap: wrap; gap: 8px`
 
 ### Code Blocks (in blog posts)
 

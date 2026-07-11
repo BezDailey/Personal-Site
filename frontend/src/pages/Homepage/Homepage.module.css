@@ -8,6 +8,27 @@
   padding: 1.5rem 1.25rem 2rem;
 }
 
+.fade {
+  animation: fadeIn 0.2s ease both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    animation: none;
+  }
+}
+
 @media (min-width: 768px) {
   .section {
     padding: 2rem 2rem 2rem;

@@ -1,7 +1,16 @@
 .container {
   position: relative;
-  padding: 1.5rem 0;
+  padding: 1.5rem 1rem;
+  margin-left: calc(-1rem - 2px);
+  margin-right: -1rem;
+  border-left: 2px solid transparent;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  transition: border-left-color 0.2s ease, background-color 0.2s ease;
+}
+
+.container:hover {
+  border-left-color: var(--signal);
+  background-color: rgba(233, 69, 96, 0.04);
 }
 
 .container:first-child {

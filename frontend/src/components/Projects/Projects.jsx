@@ -64,6 +64,7 @@ const Projects = () => {
     <div className={styles.projects}>
       {projects.map((project) => (
           <Project
+            key={project.name}
             name={project.name}
             year={project.year}
             description={project.description}

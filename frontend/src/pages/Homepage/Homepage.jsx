@@ -5,13 +5,11 @@ import styles from "./Homepage.module.css";
 
 // Components
 import Header from "../../components/Header/Header";
+import Nav from "../../components/Nav/Nav";
 import Experience from "../../components/Experience/Experience";
 import Projects from "../../components/Projects/Projects";
 import Skills from "../../components/Skills/Skills";
 import Footer from "../../components/Footer/Footer";
-import AdminPortal from "../AdminPortal/AdminPortal";
-import DebtTracker from "../DebtTracker/DebtTracker";
-import Pomodoro from "../Pomodoro/Pomodoro";
 
 const Homepage = () => {
   const [activeSection, setActiveSection] = useState("experience");
@@ -25,16 +23,20 @@ const Homepage = () => {
             setActiveSection={setActiveSection}
           />
         </div>
+        <Nav
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+          variant="bar"
+        />
         <section className={styles.section}>
-          {activeSection === "experience" && <Experience />}
-          {activeSection === "projects" && <Projects />}
-          {activeSection === "skills" && <Skills />}
-          {activeSection === "admin" && <AdminPortal setActiveSection={setActiveSection} />}
-          {activeSection === "debt-tracker" && <DebtTracker setActiveSection={setActiveSection} />}
-          {activeSection === "pomodoro" && <Pomodoro setActiveSection={setActiveSection} />}
+          <div key={activeSection} className={styles.fade}>
+            {activeSection === "experience" && <Experience />}
+            {activeSection === "projects" && <Projects />}
+            {activeSection === "skills" && <Skills />}
+          </div>
         </section>
       </div>
-      <Footer setActiveSection={setActiveSection} />
+      <Footer />
     </div>
   );
 };

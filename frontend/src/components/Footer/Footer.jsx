@@ -3,7 +3,7 @@ import githubMark from "../../images/github-mark.svg";
 import linkedIn from "../../images/linkedin.png";
 import styles from "./Footer.module.css";
 
-const Footer = ({ setActiveSection }) => {
+const Footer = () => {
   return (
     <footer className={styles.container}>
       <div className={styles.icons}>
@@ -24,12 +24,6 @@ const Footer = ({ setActiveSection }) => {
       </div>
       <div className={styles.right}>
         <p className={styles.credit}>Jabez Dailey</p>
-        <button
-          className={styles.portalLink}
-          onClick={() => setActiveSection("admin")}
-        >
-          ⌘ Portal
-        </button>
       </div>
     </footer>
   );
