@@ -9,30 +9,29 @@ const Projects = () => {
     {
       name: "Second Brain",
       year: "2026",
-      description: "RAG-powered study assistant that answers questions over a personal knowledge base. FastAPI backend with ChromaDB for vector search, React frontend, and an evaluation pipeline that measures retrieval precision and answer quality.",
+      description: "RAG-powered knowledge system over my Obsidian vault. Ingests notes to make concepts, daily logs, and learning plans searchable and conversational. Includes an annotation evaluation pipeline that measures retrieval precision and answer quality.",
       skills: [
         "Python",
         "FastAPI",
-        "React",
-        "RAG",
+        "LlamaIndex",
         "ChromaDB",
+        "React",
       ],
-      comingSoon: true,
-      // TODO: add github and website URLs when available
+      github: "https://github.com/BezDailey/SecondBrain",
     },
     {
-      name: "End-to-End Data Pipeline",
+      name: "Debt Tracker",
       year: "2026",
-      description: "Standalone data pipeline ingesting a real-world dataset, transforming it with dbt, orchestrating daily runs with Airflow, and exposing a live dashboard. Fully containerized with Docker Compose for one-command setup.",
+      description: "Full-stack personal finance app that models debt payoff strategies (snowball & avalanche), projects interest, and forecasts payoff dates across accounts. Exposes both a REST API and a CLI, backed by a type-safe Prisma + SQLite data layer with amortization logic built from scratch.",
       skills: [
-        "Python",
-        "dbt",
-        "Airflow",
-        "PostgreSQL",
-        "Docker",
+        "Node.js",
+        "Express",
+        "React",
+        "Vite",
+        "Prisma",
+        "SQLite",
       ],
-      comingSoon: true,
-      // TODO: add github and website URLs when available
+      github: "https://github.com/BezDailey/Debt-Tracker",
     },
     {
       name: "Kingdom Call Global",
