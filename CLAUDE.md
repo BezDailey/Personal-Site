@@ -23,8 +23,7 @@ This is a single-page React app (Create React App) with no routing — navigatio
 - `App.js` renders `Homepage`
 - `Homepage` holds `activeSection` state and passes `setActiveSection` to `Header`
 - `Header` renders nav buttons that call `setActiveSection` via `event.currentTarget.value` (not `event.target.value` — buttons have inner spans so target may be a child element)
-- `Homepage` conditionally renders sections based on `activeSection`: `"experience"`, `"projects"`, `"blog"`, `"admin"`, `"debt-tracker"`, `"pomodoro"`
-- Admin-only pages (`DebtTracker`, `Pomodoro`) receive `setActiveSection` as a prop and render a `← Admin Portal` back button that calls `setActiveSection("admin")`
+- `Homepage` conditionally renders sections based on `activeSection`: `"experience"`, `"projects"`, `"blog"`
 
 **Two-column layout (desktop ≥1200px):**
 - `Homepage` renders a `.layout` flex row containing `.sidebar` and `.section`
@@ -35,24 +34,13 @@ This is a single-page React app (Create React App) with no routing — navigatio
 **Blog post pattern:**
 Each blog post is a standalone component in `src/components/BlogPosts/<PostName>/`. New posts should use the shared `BlogPost` wrapper component (`src/components/BlogPosts/BlogPost/BlogPost.jsx`), which accepts `header`, `shortText`, `datePosted`, `topic` props and renders children as the expanded content. After creating a new post component, add it to `src/components/Blog/Blog.jsx` (newest first).
 
-**Admin portal pages:**
-`AdminPortal` renders a grid of `ProjectCard` components from a hardcoded `projects` array in `AdminPortal.jsx`. Each card can link to an internal route (via `internalRoute`) or an external URL. To add a new tool, add an entry to that array and a corresponding render case in `Homepage.jsx`.
-
 **Data as JSX props (not a CMS):**
 Experience entries live as a hardcoded array in `Experience.jsx`; projects live in `Projects.jsx`. To add/update content, edit those arrays directly.
 
 **Styling:** CSS Modules (`.module.css`) colocated with each component. No global CSS framework. Note: tag selectors (e.g. `button`, `h1`) in CSS Modules are NOT scoped — only class and ID selectors get hashed. The global `button { all: unset }` rule lives in `Header.module.css` and applies sitewide. A `button:hover { text-decoration: underline }` rule also applies globally — override with `text-decoration: none` on specific hover selectors when unwanted.
 
-**Debt Tracker ownership model:**
-Each debt has an `owners: string[]` field storing `["Jabez"]`, `["August"]`, or `["Jabez", "August"]`. The `DebtTracker` page holds `activeView` state (`"Jabez"` | `"August"` | `"Household"`) and derives `filteredDebts` from it — all downstream components (SummaryBar, debt list, projections, WhatIfCalculator) consume `filteredDebts`, not the full `debts` array. Shared debts appear in both individual views and in Household. The owners are hardcoded to Jabez and August in `DebtForm.jsx` (`OWNERS` constant) — do not make this configurable without revisiting the filtering logic. The `owners` column is a Postgres `TEXT[]`; it is added via `ALTER TABLE ... ADD COLUMN IF NOT EXISTS` in `initDB()`.
-
-**Backend API routes:**
-- `/api/debts` — debt CRUD (no auth required); `POST` and `PUT` accept an `owners` array
-- `/api/settings` — payoff strategy settings (no auth required)
-- `/api/login` — returns JWT on valid credentials
-- `/api/pomodoro/sessions` — pomodoro session CRUD (JWT required via `authenticateToken` middleware)
-
-New admin-only API routes should use the `authenticateToken` middleware. Pass the token from `sessionStorage.getItem("adminToken")` in an `Authorization: Bearer <token>` header.
+**Backend:**
+The Express server (`server.js`) serves the static frontend build. Admin features (login, debt tracker, pomodoro) are being removed — see GitHub project board for tracking.
 
 ---
 
@@ -97,9 +85,8 @@ Global reset in `Header.module.css`: `button { all: unset; font-size: 1.3rem; co
 
 Named button variants:
 - **Nav button** (`.navBtn`): flex row with outlined dot + label + subtitle. `text-decoration: none` on hover, color shifts to `--maroon`. Uses `event.currentTarget.value` for click handling.
-- **Beige fill** (login submit): `background: var(--beige)`, `color: var(--maroon)`, full-width. Hover darkens the beige slightly. `text-decoration: none` override required.
 - **Text CTA** (blog "Read →"): `all: unset`, `font-size: 0.8rem`, bold, `--red`. No underline on hover.
-- **Discrete link** (portal, sign out): `font-size: 0.75rem`, `color: #aaa`, hover shifts to `--maroon` or `--red`.
+- **Discrete link**: `font-size: 0.75rem`, `color: #aaa`, hover shifts to `--maroon` or `--red`.
 
 ### Navigation
 
