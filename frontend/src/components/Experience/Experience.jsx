@@ -79,7 +79,7 @@ const Experience = () => {
       date: "Jun 2021 - Aug 2022",
       title: "Technical Support Engineering Intern",
       employer: "IBM",
-      location: "Atlanta, GA",
+      location: "Remote",
       description: "Built a React component enabling data export for 3,000+ employees and wrote Python scripts to automate analysis of large datasets. Audited IBM’s Premium Support client routing process and produced technical onboarding materials.",
       skills: [
         "Python",
@@ -107,6 +107,7 @@ const Experience = () => {
     <div className={styles.experiences}>
       {experiences.map((experience) => (
         <Job
+          key={`${experience.title}-${experience.date}`}
           date={experience.date}
           title={experience.title}
           employer={experience.employer}
