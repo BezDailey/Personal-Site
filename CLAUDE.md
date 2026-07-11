@@ -42,6 +42,16 @@ Experience entries live as a hardcoded array in `Experience.jsx`; projects live 
 **Backend:**
 The Express server (`server.js`) serves the static frontend build. Admin features (login, debt tracker, pomodoro) are being removed — see GitHub project board for tracking.
 
+**Planned features (GitHub project board):**
+- Re-enable Blog section in navigation (#5)
+- Migrate from Create React App to Vite (#6)
+- Add downloadable resume/PDF link (#7)
+- Add dark mode support (#8)
+- Add SEO meta tags and Open Graph support (#9)
+- Add contact form or email link (#10)
+- Add page transition animations (#11)
+- Filter projects and experience by technology (#12)
+
 ---
 
 ## Design System
