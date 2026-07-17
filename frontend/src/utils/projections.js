@@ -1,3 +1,13 @@
+/**
+ * Simulates debt payoff month-by-month using snowball or avalanche strategy.
+ * Returns projected interest totals, payoff dates, and payoff order for each debt.
+ * @param {Array<{id: string, balance: number, interestRate: number, minimumPayment: number}>} debts - Debt accounts.
+ * @param {"snowball"|"avalanche"} strategy - Payoff strategy (lowest balance first or highest rate first).
+ * @param {number} extraPayment - Additional monthly payment applied to the priority target.
+ * @param {number} [lumpSum=0] - One-time lump-sum payment applied before simulation starts.
+ * @param {string|null} [lumpSumDebtId=null] - Debt ID to receive the lump sum; defaults to priority target.
+ * @returns {Array<{id: string, totalInterest: number, payoffDate: Date|null, payoffOrder: number}>}
+ */
 export function computeProjections(debts, strategy, extraPayment, lumpSum = 0, lumpSumDebtId = null) {
   if (!debts.length) return [];
 
@@ -73,6 +83,11 @@ export function computeProjections(debts, strategy, extraPayment, lumpSum = 0, l
   }));
 }
 
+/**
+ * Formats a number as a USD currency string with no decimal places.
+ * @param {number} n - Amount in dollars.
+ * @returns {string} Formatted string (e.g. "$1,234").
+ */
 export function fmt$(n) {
   return new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -81,6 +96,11 @@ export function fmt$(n) {
   }).format(n);
 }
 
+/**
+ * Formats a date as "Mon YYYY" (e.g. "Jan 2026"). Returns "—" for falsy input.
+ * @param {Date|string|null} date - Date to format.
+ * @returns {string}
+ */
 export function fmtMonth(date) {
   if (!date) return "—";
   return new Date(date).toLocaleDateString("en-US", {

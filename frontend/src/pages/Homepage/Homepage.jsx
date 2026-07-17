@@ -11,6 +11,13 @@ import Projects from "../../components/Projects/Projects";
 import Skills from "../../components/Skills/Skills";
 import Footer from "../../components/Footer/Footer";
 
+/**
+ * Main page component. Manages section switching between Experience,
+ * Projects, and Skills via `activeSection` state. Renders a two-column
+ * desktop layout (sticky sidebar + scrollable content) that collapses
+ * to a single column with a sticky tab bar on mobile.
+ * @returns {React.JSX.Element}
+ */
 const Homepage = () => {
   const [activeSection, setActiveSection] = useState("experience");
 

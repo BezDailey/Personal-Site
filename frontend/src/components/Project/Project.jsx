@@ -2,6 +2,19 @@ import React from "react";
 import githubMark from "../../images/github-mark.svg";
 import styles from "./Project.module.css";
 
+/**
+ * Project card with hover elevation effect, skill list, and optional
+ * GitHub/website links. Shows a "Building" badge when `comingSoon` is true.
+ * @param {Object} props
+ * @param {string} props.name - Project name.
+ * @param {string} props.year - Year the project was started or shipped.
+ * @param {string} props.description - Project summary paragraph.
+ * @param {string[]} props.skills - Technologies used, shown as a `▸`-prefixed list.
+ * @param {string} [props.github] - GitHub repository URL.
+ * @param {string} [props.website] - Live site URL.
+ * @param {boolean} [props.comingSoon] - If true, displays a "Building" badge.
+ * @returns {React.JSX.Element}
+ */
 const Project = ({ name, year, description, skills, github, website, comingSoon }) => {
   return (
     <div className={styles.card}>

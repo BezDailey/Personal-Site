@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import styles from "./BlogPost.module.css";
 
+/**
+ * Shared wrapper for blog post entries. Renders a collapsed card with
+ * metadata, title, and preview text; expands to show full content on click.
+ * @param {Object} props
+ * @param {string} props.header - Post title.
+ * @param {string} props.shortText - Preview/summary text shown when collapsed.
+ * @param {string} props.datePosted - Publication date string.
+ * @param {string} props.topic - Topic label displayed above the title.
+ * @param {React.ReactNode} props.children - Full post content shown when expanded.
+ * @returns {React.JSX.Element}
+ */
 const BlogPost = ({ header, shortText, datePosted, topic, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 

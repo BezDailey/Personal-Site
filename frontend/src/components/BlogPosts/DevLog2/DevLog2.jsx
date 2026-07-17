@@ -3,6 +3,10 @@ import BlogPost from "../BlogPost/BlogPost";
 
 import mockups from "./images/budgetMockUp.png";
 
+/**
+ * Blog post: dev log 2 — budgeting app UI mockup refinements.
+ * @returns {React.JSX.Element}
+ */
 const DevLog2 = () => {
   return (
     <BlogPost
