@@ -46,12 +46,63 @@ The Express server (`server.js`) serves the static frontend build. Admin feature
 **Planned features (GitHub project board):**
 - Re-enable Blog section in navigation (#5)
 - Migrate from Create React App to Vite (#6)
-- Add downloadable resume/PDF link (#7) — the sidebar "↓ Resume" link points to `/resume.pdf`; the PDF still needs to be added to `frontend/public/`
+- ~~Add downloadable resume/PDF link (#7)~~ — done
 - Add dark mode support (#8)
 - Add SEO meta tags and Open Graph support (#9)
-- Add contact form or email link (#10) — done (mailto link in Header)
-- Add page transition animations (#11) — done (section fade-in)
+- ~~Add contact form or email link (#10)~~ — done (mailto link in Header)
+- ~~Add page transition animations (#11)~~ — done (section fade-in)
 - Filter projects and experience by technology (#12)
+- Add commit and branch naming conventions (#17)
+- Add JSDoc documentation to source files (#18)
+- Set up CI pipeline with GitHub Actions (#19)
+- Add test coverage for components (#20)
+
+---
+
+## Conventions
+
+### Documentation Style
+
+- **Python (`server/`):** Google-style docstrings (PEP 257) on public modules, classes, and functions — a summary line plus `Args:` / `Returns:` / `Raises:` as needed. Types live in the signature; don't repeat them in the docstring. FastAPI route docstrings surface in the auto-generated `/docs` (OpenAPI) page, so write them for that audience.
+- **TypeScript (`client/`):** TSDoc comments on exported functions and types — a summary plus `@param` / `@returns` / `@throws`. Keep types in the signature, not in the tags (TypeScript already has them).
+- **Config files** (`pyproject.toml`, `docker-compose.yml`, `Makefile`, `.env.example`): plain `#` comments only — no doc-comment convention applies. `package.json` is strict JSON and takes no comments.
+
+### Issue & Task Workflow (Epic → Task hierarchy)
+
+All issues on the GitHub project board follow an **Epic → Task** hierarchy:
+
+- **Epics** are top-level issues labeled `epic` with Type "Epic" on the project board. They group related tasks using GitHub's sub-issues feature.
+- **Tasks** are individual issues that are sub-issues of an Epic.
+
+**When creating a new issue**, always:
+1. Assign a work-type label (`feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `ci`, `style`, `perf`)
+2. Find the appropriate parent Epic and add the new issue as a sub-issue. If no fitting Epic exists, create one first (label it `epic`, set Type to "Epic" on the project board, add to the "Personal Site" project)
+3. Add the issue to the "Personal Site" project board (project #2) and set the "Type" field to match the label
+4. Set the "Status" field (`Todo`, `In Progress`, or `Done`)
+
+**Current Epics:**
+- #13 Epic: Admin Cleanup — removing legacy admin features
+- #14 Epic: UX & Features — new features and visual enhancements
+- #15 Epic: Infrastructure & Tooling — build tools, CI, testing, SEO
+- #16 Epic: Documentation & Standards — conventions, JSDoc, docs
+
+## Contributing
+
+All code changes to `main` go through pull requests — never commit directly to `main`. Branch, push, and open a PR.
+
+**Authorship:** Commits are authored under the repo owner's git identity (`BezDailey <jabezdailey@icloud.com>`), never an AI/assistant identity. Do not add `Co-Authored-By` trailers, "Generated with …" footers, or similar attribution to commit messages or PR descriptions. Use conventional branch prefixes (`docs/`, `feat/`, `fix/`) — not tool-named prefixes.
+
+**Commit messages:** Follow [Conventional Commits](https://www.conventionalcommits.org) — `type(scope): summary`, with an imperative, lowercase summary kept to ~50 characters. Allowed types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `ci`, `build`, `perf`, `style`. The scope is optional (e.g. `docs(readme):`, `feat(engine):`). Mark a breaking change with `type!:` or a `BREAKING CHANGE:` footer. Example: `fix(indexer): skip notes with unchanged content hash`. (This matches the branch prefixes above and, once tooling lands, is enforced by commitlint and a PR-title check.)
+
+### Branch Naming
+
+Format: `<type>/<short-description>`
+
+Use the same type prefixes as commit messages. Examples:
+- `feat/dark-mode`
+- `fix/nav-sticky-ios`
+- `chore/remove-admin-portal`
+- `docs/add-tsdoc`
 
 ---
 
