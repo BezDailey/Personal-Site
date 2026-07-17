@@ -4,6 +4,11 @@ import styles from "./Projects.module.css";
 
 import Project from "../../components/Project/Project";
 
+/**
+ * Projects section listing portfolio projects as Project cards.
+ * Data is hardcoded as an array of project objects (not from a CMS).
+ * @returns {React.JSX.Element}
+ */
 const Projects = () => {
   const projects = [
     {

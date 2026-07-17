@@ -3,6 +3,11 @@ import githubMark from "../../images/github-mark.svg";
 import linkedIn from "../../images/linkedin.png";
 import styles from "./Footer.module.css";
 
+/**
+ * Mobile-only site footer with social icons and credit line.
+ * Hidden on desktop where the sidebar shows these links instead.
+ * @returns {React.JSX.Element}
+ */
 const Footer = () => {
   return (
     <footer className={styles.container}>

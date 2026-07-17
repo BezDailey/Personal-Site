@@ -12,6 +12,11 @@ const skillGroups = [
   { label: "Cloud & Tools", skills: ["Docker", "Git", "GitHub Actions", "CI/CD", "Azure"] },
 ];
 
+/**
+ * Skills section displaying categorized skill pills grouped by domain.
+ * Groups and their skills are defined in the `skillGroups` array above.
+ * @returns {React.JSX.Element}
+ */
 const Skills = () => {
   return (
     <div className={styles.container}>

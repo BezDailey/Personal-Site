@@ -1,6 +1,10 @@
 import React from "react";
 import BlogPost from "../BlogPost/BlogPost";
 
+/**
+ * Blog post: lessons learned from building ETL pipelines.
+ * @returns {React.JSX.Element}
+ */
 const ETLLessons = () => {
   return (
     <BlogPost

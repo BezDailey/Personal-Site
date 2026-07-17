@@ -6,6 +6,10 @@ import budgetsSection from "./images/budgetsSection.png";
 import transactionSection from "./images/transactionsSection.png";
 import addTransactionSection from "./images/budgetFooter.png";
 
+/**
+ * Blog post: dev log 1 — budgeting app initial build.
+ * @returns {React.JSX.Element}
+ */
 const DevLog1 = () => {
   return (
     <BlogPost

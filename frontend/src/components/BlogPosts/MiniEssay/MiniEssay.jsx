@@ -1,6 +1,10 @@
 import React from "react";
 import BlogPost from "../BlogPost/BlogPost";
 
+/**
+ * Blog post: mini essay.
+ * @returns {React.JSX.Element}
+ */
 const MiniEssay = () => {
   return (
     <BlogPost

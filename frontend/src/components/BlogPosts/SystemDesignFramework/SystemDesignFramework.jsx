@@ -1,6 +1,10 @@
 import React from "react";
 import BlogPost from "../BlogPost/BlogPost";
 
+/**
+ * Blog post: system design interview framework.
+ * @returns {React.JSX.Element}
+ */
 const SystemDesignFramework = () => {
   return (
     <BlogPost

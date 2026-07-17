@@ -6,6 +6,15 @@ import linkedIn from "../../images/linkedin.png";
 import Nav from "../Nav/Nav";
 import styles from "./Header.module.css";
 
+/**
+ * Site header with identity block, bio, sidebar navigation (desktop),
+ * social icons, and contact/resume links. Lives in the sticky sidebar
+ * on desktop; renders as a dark block on mobile.
+ * @param {Object} props
+ * @param {string} props.activeSection - Currently active section key.
+ * @param {function} props.setActiveSection - Callback to change the active section.
+ * @returns {React.JSX.Element}
+ */
 const Header = ({ setActiveSection, activeSection }) => {
   return (
     <header className={styles.container}>

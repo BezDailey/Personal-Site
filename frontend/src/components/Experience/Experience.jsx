@@ -4,6 +4,11 @@ import styles from "./Experience.module.css";
 
 import Job from "../Job/Job";
 
+/**
+ * Experience section listing work history as Job entries.
+ * Data is hardcoded as an array of job objects (not from a CMS).
+ * @returns {React.JSX.Element}
+ */
 const Experience = () => {
   const experiences = [
     {

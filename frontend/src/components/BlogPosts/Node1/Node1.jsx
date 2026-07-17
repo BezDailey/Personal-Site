@@ -1,6 +1,10 @@
 import React from "react";
 import BlogPost from "../BlogPost/BlogPost";
 
+/**
+ * Blog post: Node.js learnings (part 1).
+ * @returns {React.JSX.Element}
+ */
 const Node1 = () => {
   return (
     <BlogPost
