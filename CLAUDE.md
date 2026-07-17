@@ -43,15 +43,46 @@ Experience entries live as a hardcoded array in `Experience.jsx`; projects live 
 **Backend:**
 The Express server (`server.js`) serves the static frontend build. Admin features (login, debt tracker, pomodoro) are being removed — all UI entry points (the "⌘ Portal" buttons) are gone and `Homepage` no longer renders those sections; the page components still exist on disk pending full removal (see GitHub project board).
 
-**Planned features (GitHub project board):**
-- Re-enable Blog section in navigation (#5)
-- Migrate from Create React App to Vite (#6)
-- Add downloadable resume/PDF link (#7) — the sidebar "↓ Resume" link points to `/resume.pdf`; the PDF still needs to be added to `frontend/public/`
-- Add dark mode support (#8)
-- Add SEO meta tags and Open Graph support (#9)
-- Add contact form or email link (#10) — done (mailto link in Header)
-- Add page transition animations (#11) — done (section fade-in)
-- Filter projects and experience by technology (#12)
+---
+
+## Conventions
+
+### Documentation Style
+
+- **JavaScript/JSX (`frontend/src/`):** JSDoc comments on exported components and functions — a summary plus `@param` / `@returns` as needed. Document component props, purpose, and usage patterns.
+- **Config files** (`.env.example`): plain `#` comments only — no doc-comment convention applies. `package.json` is strict JSON and takes no comments.
+
+### Issue & Task Workflow (Epic → Task hierarchy)
+
+All issues on the GitHub project board follow an **Epic → Task** hierarchy:
+
+The project board uses two classification fields:
+- **Hierarchy** — `Epic` (top-level grouping) or `Task` (individual work item under an Epic). Epics use GitHub's sub-issues feature to track child tasks.
+- **Type** — the work type: `feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `ci`, `style`, `perf`. Matches the commit/branch prefix. All issues (both epics and tasks) must have a Type.
+
+**When creating a new issue**, always:
+1. Assign a work-type label (`feat`, `fix`, `chore`, `docs`, `refactor`, `test`, `ci`, `style`, `perf`)
+2. Find the appropriate parent Epic and add the new issue as a sub-issue. If no fitting Epic exists, create one first (label it `epic`, set Hierarchy to "Epic" on the project board)
+3. Add the issue to the "Personal Site" project board (project #2) and set the "Hierarchy" field (`Epic` or `Task`), the "Type" field to match the label, a "Start Date", and a "Target Date"
+4. Set the "Status" field (`Todo`, `In Progress`, or `Done`)
+
+## Contributing
+
+All code changes to `main` go through pull requests — never commit directly to `main`. Branch, push, and open a PR.
+
+**Authorship:** Commits are authored under the repo owner's git identity (`BezDailey <jabezdailey@icloud.com>`), never an AI/assistant identity. Do not add `Co-Authored-By` trailers, "Generated with …" footers, or similar attribution to commit messages or PR descriptions. Use conventional branch prefixes (`docs/`, `feat/`, `fix/`) — not tool-named prefixes.
+
+**Commit messages:** Follow [Conventional Commits](https://www.conventionalcommits.org) — `type(scope): summary`, with an imperative, lowercase summary kept to ~50 characters. Allowed types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `ci`, `build`, `perf`, `style`. The scope is optional (e.g. `docs(readme):`, `feat(engine):`). Mark a breaking change with `type!:` or a `BREAKING CHANGE:` footer. Example: `fix(indexer): skip notes with unchanged content hash`. (This matches the branch prefixes above and, once tooling lands, is enforced by commitlint and a PR-title check.)
+
+### Branch Naming
+
+Format: `<type>/<short-description>`
+
+Use the same type prefixes as commit messages. Examples:
+- `feat/dark-mode`
+- `fix/nav-sticky-ios`
+- `chore/remove-admin-portal`
+- `docs/add-tsdoc`
 
 ---
 
