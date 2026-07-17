@@ -43,20 +43,6 @@ Experience entries live as a hardcoded array in `Experience.jsx`; projects live 
 **Backend:**
 The Express server (`server.js`) serves the static frontend build. Admin features (login, debt tracker, pomodoro) are being removed — all UI entry points (the "⌘ Portal" buttons) are gone and `Homepage` no longer renders those sections; the page components still exist on disk pending full removal (see GitHub project board).
 
-**Planned features (GitHub project board):**
-- Re-enable Blog section in navigation (#5)
-- Migrate from Create React App to Vite (#6)
-- ~~Add downloadable resume/PDF link (#7)~~ — done
-- Add dark mode support (#8)
-- Add SEO meta tags and Open Graph support (#9)
-- ~~Add contact form or email link (#10)~~ — done (mailto link in Header)
-- ~~Add page transition animations (#11)~~ — done (section fade-in)
-- Filter projects and experience by technology (#12)
-- Add commit and branch naming conventions (#17)
-- Add JSDoc documentation to source files (#18)
-- Set up CI pipeline with GitHub Actions (#19)
-- Add test coverage for components (#20)
-
 ---
 
 ## Conventions
@@ -79,12 +65,6 @@ The project board uses two classification fields:
 2. Find the appropriate parent Epic and add the new issue as a sub-issue. If no fitting Epic exists, create one first (label it `epic`, set Hierarchy to "Epic" on the project board)
 3. Add the issue to the "Personal Site" project board (project #2) and set the "Hierarchy" field (`Epic` or `Task`), the "Type" field to match the label, a "Start Date", and a "Target Date"
 4. Set the "Status" field (`Todo`, `In Progress`, or `Done`)
-
-**Current Epics:**
-- #13 Epic: Admin Cleanup — removing legacy admin features
-- #14 Epic: UX & Features — new features and visual enhancements
-- #15 Epic: Infrastructure & Tooling — build tools, CI, testing, SEO
-- #16 Epic: Documentation & Standards — conventions, JSDoc, docs
 
 ## Contributing
 
