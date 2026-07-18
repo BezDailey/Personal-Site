@@ -18,8 +18,8 @@ const Projects = () => {
       skills: [
         "TypeScript",
         "Obsidian API",
-        "better-sqlite3",
-        "esbuild",
+        "SQLite",
+        "Node.js",
       ],
       github: "https://github.com/BezDailey/obsidian-projects-board",
     },
