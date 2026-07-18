@@ -17,9 +17,8 @@ const Projects = () => {
       description: "Custom Obsidian plugin that renders kanban and roadmap views from a local SQLite database. Reads directly from the same database as my Projects CLI, giving visual project management inside the vault with no API or sync layer.",
       skills: [
         "TypeScript",
-        "Obsidian API",
         "SQLite",
-        "Node.js",
+        "Plugin Development",
       ],
       github: "https://github.com/BezDailey/obsidian-projects-board",
     },
