@@ -12,6 +12,17 @@ import Project from "../../components/Project/Project";
 const Projects = () => {
   const projects = [
     {
+      name: "Obsidian Projects Board",
+      year: "2026",
+      description: "Custom Obsidian plugin that renders kanban and roadmap views from a local SQLite database. Reads directly from the same database as my Projects CLI, giving visual project management inside the vault with no API or sync layer.",
+      skills: [
+        "TypeScript",
+        "SQLite",
+        "Plugin Development",
+      ],
+      github: "https://github.com/BezDailey/obsidian-projects-board",
+    },
+    {
       name: "Second Brain",
       year: "2026",
       description: "RAG-powered knowledge system over my Obsidian vault. Ingests notes to make concepts, daily logs, and learning plans searchable and conversational. Includes an annotation evaluation pipeline that measures retrieval precision and answer quality.",
