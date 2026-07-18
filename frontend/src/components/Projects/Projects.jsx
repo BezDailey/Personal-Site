@@ -14,7 +14,7 @@ const Projects = () => {
     {
       name: "Obsidian Projects Board",
       year: "2026",
-      description: "Custom Obsidian plugin that reads from a local SQLite database and renders kanban and roadmap views directly inside the vault. Desktop only, using native Node.js modules via Electron for zero-latency, offline-first project management.",
+      description: "Custom Obsidian plugin that renders kanban and roadmap views from a local SQLite database. Reads directly from the same database as my Projects CLI, giving visual project management inside the vault with no API or sync layer.",
       skills: [
         "TypeScript",
         "Obsidian API",
